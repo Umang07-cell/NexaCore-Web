@@ -1,51 +1,58 @@
-const nodemailer = require('nodemailer');
+const https = require('https');
 
-function createTransporter() {
-  return nodemailer.createTransport({
-    host:   process.env.SMTP_HOST,
-    port:   Number(process.env.SMTP_PORT) || 587,
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
-    },
-    connectionTimeout: 10000,
-    greetingTimeout:   10000,
-    socketTimeout:     15000
+function hasBrevoConfig() {
+  return Boolean(process.env.BREVO_API_KEY);
+}
+
+function sendBrevoEmail({ to, toName, subject, html, text }) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      sender: { name: 'NexaCore', email: 'aatharvkale60@gmail.com' },
+      to: [{ email: to, name: toName || to }],
+      subject,
+      htmlContent: html,
+      textContent: text
+    });
+
+    const options = {
+      hostname: 'api.brevo.com',
+      path: '/v3/smtp/email',
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': process.env.BREVO_API_KEY,
+        'content-type': 'application/json',
+        'content-length': Buffer.byteLength(body)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(data);
+        } else {
+          reject(new Error(`Brevo API error ${res.statusCode}: ${data}`));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.write(body);
+    req.end();
   });
 }
 
-function hasSmtpConfig() {
-  return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
-}
-
-async function sendWithRetry(mailOptions, retries = 2) {
-  for (let attempt = 1; attempt <= retries + 1; attempt++) {
-    const transporter = createTransporter();
-    try {
-      await transporter.sendMail(mailOptions);
-      return;
-    } catch (err) {
-      const isTransient = err.code === 'ECONNECTION' || err.code === 'ETIMEDOUT' ||
-                          (err.responseCode && err.responseCode >= 420);
-      if (isTransient && attempt <= retries) {
-        await new Promise(r => setTimeout(r, 800 * attempt));
-      } else {
-        throw err;
-      }
-    }
-  }
-}
-
 async function sendOTPEmail(toEmail, toName, otp) {
-  if (!hasSmtpConfig()) {
+  if (!hasBrevoConfig()) {
     console.log(`\n📧  [DEV] OTP for ${toEmail}: ${otp}\n`);
     return { devMode: true, otp };
   }
 
-  await sendWithRetry({
-    from:    process.env.MAIL_FROM || process.env.SMTP_USER,
-    to:      toEmail,
+  await sendBrevoEmail({
+    to: toEmail,
+    toName,
     subject: 'Your NexaCore Verification Code',
     html: `
       <div style="font-family:Arial,sans-serif;max-width:480px;margin:auto;padding:32px;background:#f9fafb;border-radius:12px;">
@@ -63,18 +70,21 @@ async function sendOTPEmail(toEmail, toName, otp) {
 }
 
 async function sendContactEmail({ name, email, subject, message }) {
-  if (!hasSmtpConfig()) {
+  if (!hasBrevoConfig()) {
     console.log(`\n📧  [DEV] Contact from ${name} <${email}>: ${subject}\n`);
     return;
   }
-  const dest = process.env.CONTACT_TO || process.env.SMTP_USER;
-  await sendWithRetry({
-    from:    process.env.MAIL_FROM || process.env.SMTP_USER,
-    to:      dest,
-    replyTo: email,
+
+  await sendBrevoEmail({
+    to: process.env.CONTACT_TO || 'aatharvkale60@gmail.com',
+    toName: 'NexaCore Team',
     subject: `NexaCore Contact: ${subject}`,
-    text:    `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`
+    text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`
   });
+}
+
+function hasSmtpConfig() {
+  return hasBrevoConfig();
 }
 
 module.exports = { sendOTPEmail, sendContactEmail, hasSmtpConfig };
