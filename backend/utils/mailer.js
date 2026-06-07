@@ -1,11 +1,7 @@
 const nodemailer = require('nodemailer');
 
-// ── Single shared transporter (reused across calls, avoids reconnection delays)
-let _transporter = null;
-
-function getTransporter() {
-  if (_transporter) return _transporter;
-  _transporter = nodemailer.createTransport({
+function createTransporter() {
+  return nodemailer.createTransport({
     host:   process.env.SMTP_HOST,
     port:   Number(process.env.SMTP_PORT) || 587,
     secure: process.env.SMTP_SECURE === 'true',
@@ -13,52 +9,34 @@ function getTransporter() {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS
     },
-    // Connection pool — avoids re-establishing SMTP handshake on every email
-    pool:           true,
-    maxConnections: 3,
-    maxMessages:    100,
-    // Increase timeouts so slow SMTP servers don't drop the first attempt
-    connectionTimeout: 10000,   // 10 s
+    connectionTimeout: 10000,
     greetingTimeout:   10000,
     socketTimeout:     15000
   });
-  return _transporter;
 }
 
 function hasSmtpConfig() {
   return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
 }
 
-/**
- * Send an email with up to 2 retries on transient failures.
- */
 async function sendWithRetry(mailOptions, retries = 2) {
-  const transporter = getTransporter();
   for (let attempt = 1; attempt <= retries + 1; attempt++) {
+    const transporter = createTransporter();
     try {
       await transporter.sendMail(mailOptions);
-      return; // success
+      return;
     } catch (err) {
       const isTransient = err.code === 'ECONNECTION' || err.code === 'ETIMEDOUT' ||
-                          err.responseCode >= 420;
+                          (err.responseCode && err.responseCode >= 420);
       if (isTransient && attempt <= retries) {
-        // Brief back-off before retry
         await new Promise(r => setTimeout(r, 800 * attempt));
-        // Reset transporter on connection errors so pool reconnects
-        if (err.code === 'ECONNECTION' || err.code === 'ETIMEDOUT') {
-          try { _transporter.close(); } catch (_) {}
-          _transporter = null;
-        }
       } else {
-        throw err; // Non-transient or out of retries
+        throw err;
       }
     }
   }
 }
 
-/**
- * Send OTP email for registration verification.
- */
 async function sendOTPEmail(toEmail, toName, otp) {
   if (!hasSmtpConfig()) {
     console.log(`\n📧  [DEV] OTP for ${toEmail}: ${otp}\n`);
@@ -84,9 +62,6 @@ async function sendOTPEmail(toEmail, toName, otp) {
   return { devMode: false };
 }
 
-/**
- * Send contact form notification to the NexaCore team.
- */
 async function sendContactEmail({ name, email, subject, message }) {
   if (!hasSmtpConfig()) {
     console.log(`\n📧  [DEV] Contact from ${name} <${email}>: ${subject}\n`);
