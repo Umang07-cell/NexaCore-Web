@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - NexaCore</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/auth.css">
+  <link rel="stylesheet" href="CSS/responsive.css">
+  <style>
+    .auth-error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #dc2626;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .auth-success {
+      display: none;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      color: #16a34a;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+    <a href="/" class="logo">Nexa<span>Core</span></a>
+    <h2>Welcome Back</h2>
+    <p class="auth-sub">Sign in to your account to continue</p>
+
+    <div class="auth-error"  id="authError"></div>
+    <div class="auth-success" id="authSuccess"></div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="off"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" autocomplete="new-password"
+             onkeydown="if(event.key==='Enter') handleLogin()"/>
+    </div>
+
+    <button class="auth-btn" onclick="handleLogin()">Login</button>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="signup.html">Sign Up</a>
+    </div>
+  </div>
+</div>
+<script src="JS/script.js"></script>
+<script>
+  // If already logged in, go directly to dashboard
+  redirectIfLoggedIn();
+
+  // Clear login fields on every load so previous credentials don't show as placeholder/prefill
+  window.addEventListener('DOMContentLoaded', function () {
+    const emailEl = document.getElementById('email');
+    const passEl  = document.getElementById('password');
+    if (emailEl) { emailEl.value = ''; emailEl.setAttribute('placeholder', 'you@example.com'); }
+    if (passEl)  { passEl.value  = ''; passEl.setAttribute('placeholder', 'Enter your password'); }
+  });
+</script>
+</body>
+</html>

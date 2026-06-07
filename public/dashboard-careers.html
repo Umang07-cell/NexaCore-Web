@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Careers | NexaCore Dashboard</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/dashboard.css">
+  <link rel="stylesheet" href="CSS/pages.css">
+  <link rel="stylesheet" href="CSS/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .careers-inner { padding: 0 0 40px; }
+    .careers-inner .page-hero {
+      border-radius: 16px;
+      margin-bottom: 32px;
+      padding: 48px 40px;
+    }
+    .careers-inner .jobs-section,
+    .careers-inner .culture-section { padding: 0; margin-bottom: 32px; }
+    .careers-inner .section-header { margin-bottom: 24px; }
+  </style>
+</head>
+<body class="dashboard-body">
+<div class="dashboard-shell">
+
+  <!-- Sidebar -->
+  <aside class="dashboard-sidebar">
+    <a class="logo" href="/">Nexa<span>Core</span></a>
+    <nav>
+      <a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Overview</a>
+      <a href="my-services.html"><i class="fa-solid fa-layer-group"></i> My Services</a>
+      <a href="dashboard-contact.html"><i class="fa-solid fa-message"></i> Contact Team</a>
+      <a href="dashboard-connect-team.html"><i class="fa-solid fa-users"></i> Connect Team</a>
+      <a class="active" href="dashboard-careers.html"><i class="fa-solid fa-briefcase"></i> Careers</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <div class="careers-inner">
+
+      <section class="page-hero careers-hero">
+        <div class="page-kicker"><i class="fa-solid fa-briefcase"></i> Careers</div>
+        <h1>Build Useful Technology With NexaCore</h1>
+        <p>Join a team working across software, cloud, support, and automation for clients who value reliable execution.</p>
+        <div class="page-actions">
+          <a class="btn-primary" href="mailto:careers@nexacore.com">Apply Now</a>
+          <a class="btn-secondary" href="dashboard-contact.html">Ask a Question</a>
+        </div>
+      </section>
+
+      <section class="jobs-section">
+        <div class="section-header">
+          <div class="section-label">Open Roles</div>
+          <h2>Current Opportunities</h2>
+          <p>Send your resume with the role title in the subject line.</p>
+        </div>
+        <div class="job-grid">
+          <div class="job-card">
+            <span>Internship</span>
+            <h3>Software Engineer Intern</h3>
+            <p>Work on frontend and backend features with senior engineering guidance.</p>
+            <a href="mailto:careers@nexacore.com?subject=Software Engineer Intern">Apply</a>
+          </div>
+          <div class="job-card">
+            <span>Full Time</span>
+            <h3>Frontend Developer</h3>
+            <p>Create polished, responsive interfaces for business-critical applications.</p>
+            <a href="mailto:careers@nexacore.com?subject=Frontend Developer">Apply</a>
+          </div>
+          <div class="job-card">
+            <span>Full Time</span>
+            <h3>Backend Developer</h3>
+            <p>Build APIs, integrations, data workflows, and reliable service foundations.</p>
+            <a href="mailto:careers@nexacore.com?subject=Backend Developer">Apply</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="culture-section">
+        <div>
+          <div class="section-label">Culture</div>
+          <h2>Practical, Calm, and Client-Focused</h2>
+          <p>We value clear communication, ownership, learning, and shipping work that makes life easier for the teams who use it.</p>
+        </div>
+        <div class="culture-list">
+          <span>Mentorship</span>
+          <span>Remote-friendly workflows</span>
+          <span>Modern tools</span>
+          <span>Client impact</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="JS/script.js"></script>
+<script>
+  (async function () {
+    const user = await requireAuth();
+    if (!user) return;
+  })();
+</script>
+</body>
+</html>

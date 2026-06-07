@@ -1,0 +1,305 @@
+/* ================================= */
+/* ===== SERVICES PAGE ============= */
+/* ================================= */
+
+.service-hero{
+  padding:120px 60px;
+  text-align:center;
+  background:var(--light-bg);
+}
+
+.service-hero h1{
+  font-size:60px;
+  color:var(--navy);
+  margin:20px 0;
+}
+
+.service-hero p{
+  max-width:700px;
+  margin:auto;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.service-page-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  padding:100px 60px;
+}
+
+.service-detail-card{
+  padding:40px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  transition:.3s;
+}
+
+.service-detail-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.service-detail-card i{
+  font-size:40px;
+  color:var(--sky-blue);
+  margin-bottom:20px;
+}
+
+.service-detail-card h3{
+  color:var(--navy);
+  margin-bottom:15px;
+}
+
+.service-detail-card p{
+  color:var(--muted);
+  line-height:1.8;
+}
+
+/* ================================= */
+/* ===== CASE STUDIES PAGE ========= */
+/* ================================= */
+
+.case-hero{
+  padding:120px 60px;
+  text-align:center;
+  background:var(--light-bg);
+}
+
+.case-hero h1{
+  font-size:60px;
+  color:var(--navy);
+  margin:20px 0;
+}
+
+.case-hero p{
+  color:var(--muted);
+  max-width:700px;
+  margin:auto;
+  line-height:1.8;
+}
+
+.case-grid{
+  padding:100px 60px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+.case-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:40px;
+  transition:.3s;
+}
+
+.case-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.case-metric{
+  font-size:50px;
+  font-weight:800;
+  color:var(--sky-blue);
+  margin-bottom:20px;
+}
+
+.case-card h3{
+  color:var(--navy);
+  margin-bottom:15px;
+}
+
+.case-card p{
+  color:var(--muted);
+  line-height:1.8;
+}
+
+/* ================================= */
+/* ===== IMPACT SECTION ============ */
+/* ================================= */
+
+.impact-section{
+  background:var(--navy);
+  padding:80px 60px;
+  display:flex;
+  justify-content:center;
+  gap:60px;
+}
+
+.impact-box{
+  text-align:center;
+}
+
+.impact-box h2{
+  color:var(--sky-blue);
+  font-size:50px;
+}
+
+.impact-box p{
+  color:white;
+}
+/* ===== MODERN INNER PAGES ===== */
+.page-hero {
+  padding: 110px 60px 90px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(11,30,61,.05), rgba(41,181,232,.1));
+}
+
+.page-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #E0F5FC;
+  color: var(--sky-blue);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-hero h1 {
+  max-width: 820px;
+  margin: 22px auto 18px;
+  color: var(--navy);
+  font-size: 54px;
+  line-height: 1.12;
+}
+
+.page-hero p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+.page-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.service-page-grid-four {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.detail-layout {
+  padding: 90px 60px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 34px;
+  max-width: 1180px;
+  margin: auto;
+}
+
+.detail-main,
+.detail-aside,
+.legal-content article,
+.job-card,
+.process-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(11,30,61,.06);
+}
+
+.detail-main { padding: 42px; }
+.detail-main h2 { color: var(--navy); font-size: 34px; margin-bottom: 24px; }
+.detail-aside { padding: 32px; align-self: start; }
+.detail-aside h3 { color: var(--navy); margin-bottom: 12px; }
+.detail-aside p { color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+.detail-aside a { color: var(--sky-blue); font-weight: 800; }
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.capability {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--navy);
+  background: var(--light-bg);
+}
+
+.capability i { color: var(--sky-blue); margin-top: 3px; }
+
+.process-section,
+.jobs-section {
+  padding: 90px 60px;
+  background: var(--light-bg);
+}
+
+.process-grid,
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  max-width: 1180px;
+  margin: auto;
+}
+
+.process-card { padding: 28px; }
+.process-card span { color: var(--sky-blue); font-weight: 900; }
+.process-card h3 { color: var(--navy); margin-top: 12px; font-size: 18px; line-height: 1.4; }
+
+.cta-band {
+  margin: 0;
+  padding: 70px 60px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.cta-band h2 { color: white; font-size: 32px; }
+
+.job-grid { grid-template-columns: repeat(3, 1fr); }
+.job-card { padding: 32px; }
+.job-card span { color: var(--sky-blue); font-weight: 800; font-size: 13px; text-transform: uppercase; }
+.job-card h3 { color: var(--navy); margin: 14px 0 10px; }
+.job-card p { color: var(--muted); line-height: 1.7; margin-bottom: 22px; }
+.job-card a { color: var(--sky-blue); font-weight: 800; }
+
+.culture-section {
+  padding: 90px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.culture-section h2 { color: var(--navy); font-size: 36px; margin: 12px 0; }
+.culture-section p { color: var(--muted); line-height: 1.8; }
+.culture-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.culture-list span { padding: 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--light-bg); color: var(--navy); font-weight: 700; }
+
+.legal-content {
+  padding: 80px 20px;
+  background: var(--light-bg);
+}
+
+.legal-content article {
+  max-width: 860px;
+  margin: auto;
+  padding: 46px;
+}
+
+.legal-content h2 { color: var(--navy); margin: 24px 0 10px; }
+.legal-content p { color: var(--muted); line-height: 1.8; }
+.legal-content a { color: var(--sky-blue); font-weight: 700; }
+.updated { margin-top: 28px; font-size: 14px; }

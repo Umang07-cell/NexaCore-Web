@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connect with Team | NexaCore</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/dashboard.css">
+  <link rel="stylesheet" href="CSS/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .connect-wrap { max-width: 640px; }
+    .connect-wrap h1 { font-size: 26px; color: var(--navy); margin: 6px 0 4px; }
+    .connect-wrap .sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+
+    .connect-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+      margin-bottom: 24px;
+    }
+    .connect-card .form-group { margin-bottom: 16px; }
+    .connect-card label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .connect-card select,
+    .connect-card textarea,
+    .connect-card input {
+      width: 100%; padding: 10px 14px;
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: 14px; color: var(--navy); background: #fafafa;
+      box-sizing: border-box; font-family: inherit; transition: border .2s;
+    }
+    .connect-card select:focus,
+    .connect-card textarea:focus,
+    .connect-card input:focus { outline: none; border-color: var(--sky-blue); background: white; }
+    .connect-card textarea { resize: vertical; min-height: 110px; }
+    .connect-card .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .submit-btn {
+      background: var(--sky-blue); color: white; border: none;
+      padding: 11px 28px; border-radius: 8px; font-size: 14px;
+      font-weight: 600; cursor: pointer; transition: .2s;
+    }
+    .submit-btn:hover { opacity: .88; }
+    .submit-btn:disabled { opacity: .55; cursor: default; }
+
+    .status-msg {
+      margin-top: 14px; padding: 10px 14px; border-radius: 8px;
+      font-size: 14px; display: none;
+    }
+    .status-msg.success { background: #f0fdf4; color: #16a34a; border: 1px solid #86efac; display: block; }
+    .status-msg.error   { background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; display: block; }
+
+    /* Past requests */
+    .past-title { font-size: 18px; color: var(--navy); font-weight: 700; margin-bottom: 14px; }
+    .request-item {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 18px; margin-bottom: 10px;
+    }
+    .request-item .dept { font-size: 12px; font-weight: 700; color: var(--sky-blue); text-transform: uppercase; letter-spacing: .5px; }
+    .request-item .msg { font-size: 14px; color: var(--navy); margin: 4px 0 6px; }
+    .request-item .meta { font-size: 12px; color: var(--muted); }
+    .badge {
+      display: inline-block; padding: 2px 10px; border-radius: 20px;
+      font-size: 11px; font-weight: 600;
+    }
+    .badge.pending     { background: #fef9c3; color: #ca8a04; }
+    .badge.in-progress { background: #dbeafe; color: #1d4ed8; }
+    .badge.resolved    { background: #dcfce7; color: #16a34a; }
+
+    @media (max-width: 768px) {
+      .connect-card .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="dashboard-body">
+<div class="dashboard-shell">
+
+  <!-- Sidebar -->
+  <aside class="dashboard-sidebar">
+    <a class="logo" href="/">Nexa<span>Core</span></a>
+    <nav>
+      <a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Overview</a>
+      <a href="my-services.html"><i class="fa-solid fa-layer-group"></i> My Services</a>
+      <a href="dashboard-contact.html"><i class="fa-solid fa-message"></i> Contact Team</a>
+      <a href="dashboard-connect-team.html"><i class="fa-solid fa-users"></i> Connect Team</a>
+      <a href="dashboard-careers.html"><i class="fa-solid fa-briefcase"></i> Careers</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="dashboard-main">
+    <span class="section-label">Client Portal</span>
+    <div class="connect-wrap">
+      <h1>Connect with a Team Member</h1>
+      <p class="sub">Tell us what you need and we'll match you with the right person. All requests are saved to your account.</p>
+
+      <div class="connect-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="department">Team / Department</label>
+            <select id="department">
+              <option value="">Select a team…</option>
+              <option value="engineering">Engineering</option>
+              <option value="cloud">Cloud & Infrastructure</option>
+              <option value="support">IT Support</option>
+              <option value="ai">AI & Automation</option>
+              <option value="sales">Sales</option>
+              <option value="general">General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="preferredContact">Preferred Contact Method</label>
+            <select id="preferredContact">
+              <option value="email">Email</option>
+              <option value="phone">Phone</option>
+              <option value="video">Video Call</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" id="phoneGroup" style="display:none;">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+91 00000 00000"/>
+        </div>
+
+        <div class="form-group">
+          <label for="message">What do you need help with?</label>
+          <textarea id="message" placeholder="Briefly describe what you're looking for or the problem you need solved…"></textarea>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitRequest()">Send Request</button>
+        <div class="status-msg" id="statusMsg"></div>
+      </div>
+
+      <!-- Past requests -->
+      <div id="pastSection" style="display:none;">
+        <p class="past-title">Your Previous Requests</p>
+        <div id="pastList"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="JS/script.js"></script>
+<script>
+const DEPT_LABELS = {
+  engineering: 'Engineering',
+  cloud: 'Cloud & Infrastructure',
+  support: 'IT Support',
+  ai: 'AI & Automation',
+  sales: 'Sales',
+  general: 'General Inquiry'
+};
+
+// Show/hide phone field
+document.getElementById('preferredContact').addEventListener('change', function () {
+  document.getElementById('phoneGroup').style.display = this.value === 'phone' ? 'block' : 'none';
+});
+
+async function submitRequest() {
+  const dept    = document.getElementById('department').value;
+  const contact = document.getElementById('preferredContact').value;
+  const phone   = document.getElementById('phone').value.trim();
+  const msg     = document.getElementById('message').value.trim();
+  const statusEl = document.getElementById('statusMsg');
+  const btn      = document.getElementById('submitBtn');
+
+  statusEl.className = 'status-msg';
+  statusEl.style.display = 'none';
+
+  if (!dept)  { showStatus('Please select a team / department.', 'error'); return; }
+  if (!msg)   { showStatus('Please describe what you need help with.', 'error'); return; }
+  if (contact === 'phone' && !phone) { showStatus('Please enter your phone number.', 'error'); return; }
+
+  btn.disabled = true; btn.textContent = 'Sending…';
+
+  try {
+    const res  = await apiFetch('/api/team/connect', {
+      method: 'POST',
+      body: JSON.stringify({ department: dept, preferredContact: contact, phone, message: msg })
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showStatus(data.message || 'Could not submit request.', 'error');
+    } else {
+      showStatus(data.message, 'success');
+      // Reset form
+      document.getElementById('department').value = '';
+      document.getElementById('preferredContact').value = 'email';
+      document.getElementById('phone').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('phoneGroup').style.display = 'none';
+      loadPastRequests();
+    }
+  } catch (e) {
+    showStatus('Network error. Please try again.', 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Send Request';
+  }
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = 'status-msg ' + type;
+}
+
+async function loadPastRequests() {
+  try {
+    const res  = await fetch('/api/team/connect', { credentials: 'include' });
+    const data = await res.json();
+    if (!data.success || data.entries.length === 0) return;
+
+    const section = document.getElementById('pastSection');
+    const list    = document.getElementById('pastList');
+    list.innerHTML = '';
+    section.style.display = 'block';
+
+    data.entries.forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'request-item';
+      const date = new Date(e.submittedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      div.innerHTML = `
+        <div class="dept">${DEPT_LABELS[e.department] || e.department}
+          <span class="badge ${e.status}">${e.status}</span>
+        </div>
+        <p class="msg">${e.message.length > 120 ? e.message.substring(0,120) + '…' : e.message}</p>
+        <p class="meta">Submitted ${date} &bull; Contact via ${e.preferredContact}</p>`;
+      list.appendChild(div);
+    });
+  } catch (e) { /* silent */ }
+}
+
+(async function () {
+  const user = await requireAuth();
+  if (!user) return;
+  loadPastRequests();
+})();
+</script>
+</body>
+</html>

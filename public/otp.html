@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify Email - NexaCore</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/auth.css">
+  <link rel="stylesheet" href="CSS/responsive.css">
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+    <a href="/" class="logo">Nexa<span>Core</span></a>
+    <h2>Verify Your Email</h2>
+    <p class="auth-sub" id="otpSubtitle">Enter the 6-digit code sent to your email to complete registration.</p>
+
+    <div class="otp-inputs">
+      <input type="text" inputmode="numeric" maxlength="1" id="o1" oninput="otpAutoFocus(this, null, 'o2')" />
+      <input type="text" inputmode="numeric" maxlength="1" id="o2" oninput="otpAutoFocus(this, 'o1', 'o3')" />
+      <input type="text" inputmode="numeric" maxlength="1" id="o3" oninput="otpAutoFocus(this, 'o2', 'o4')" />
+      <input type="text" inputmode="numeric" maxlength="1" id="o4" oninput="otpAutoFocus(this, 'o3', 'o5')" />
+      <input type="text" inputmode="numeric" maxlength="1" id="o5" oninput="otpAutoFocus(this, 'o4', 'o6')" />
+      <input type="text" inputmode="numeric" maxlength="1" id="o6" oninput="otpAutoFocus(this, 'o5', null)" />
+    </div>
+
+    <p class="otp-error" id="otpError" style="display:none; color:#dc2626; font-size:14px; margin-bottom:10px;"></p>
+
+    <button class="auth-btn" onclick="verifyOTP()">Verify & Continue</button>
+
+    <div class="resend-link">
+      Didn't receive it? <button onclick="resendOTP()" style="background:none;border:none;color:var(--sky-blue);cursor:pointer;font-weight:600;">Resend OTP</button>
+    </div>
+
+    <div class="auth-footer">
+      Wrong account? <a href="signup.html">Sign up again</a>
+    </div>
+  </div>
+</div>
+<script src="JS/script.js"></script>
+<script>
+  // If no pending userId, redirect to signup
+  (function() {
+    const uid = sessionStorage.getItem('nc_pending_uid');
+    if (!uid) window.location.replace('signup.html');
+  })();
+</script>
+</body>
+</html>
