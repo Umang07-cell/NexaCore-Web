@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | NexaCore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:#0c1b33;display:flex;min-height:100vh}
+    /* Sidebar */
+    .sidebar{width:240px;background:#0c1b33;color:#fff;display:flex;flex-direction:column;position:fixed;height:100vh;z-index:100}
+    .sidebar-brand{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
+    .sidebar-brand h2{font-size:20px;font-weight:700}
+    .sidebar-brand h2 span{color:#0ea5e9}
+    .sidebar-brand p{font-size:11px;color:#94a3b8;margin-top:2px}
+    .sidebar-nav{flex:1;padding:16px 0;overflow-y:auto}
+    .nav-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;font-size:14px;color:#94a3b8;transition:all 0.2s;border-left:3px solid transparent}
+    .nav-item:hover{background:rgba(255,255,255,0.05);color:#fff}
+    .nav-item.active{background:rgba(14,165,233,0.12);color:#0ea5e9;border-left-color:#0ea5e9}
+    .nav-item i{width:18px;text-align:center}
+    .sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+    .logout-btn{display:flex;align-items:center;gap:10px;color:#94a3b8;cursor:pointer;font-size:14px;background:none;border:none;width:100%;padding:0}
+    .logout-btn:hover{color:#fff}
+    /* Main */
+    .main{margin-left:240px;flex:1;padding:28px;min-height:100vh}
+    .page-header{margin-bottom:24px}
+    .page-header h1{font-size:22px;font-weight:700;color:#0c1b33}
+    .page-header p{color:#64748b;font-size:13px;margin-top:4px}
+    /* Section */
+    .section{display:none}
+    .section.active{display:block}
+    /* Stats */
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:28px}
+    .stat-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+    .stat-card .label{font-size:12px;color:#64748b;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+    .stat-card .value{font-size:32px;font-weight:700;color:#0c1b33;margin-top:6px}
+    .stat-card .icon{font-size:20px;color:#0ea5e9;margin-bottom:8px}
+    /* Cards */
+    .card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:20px}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .card-header h3{font-size:16px;font-weight:600}
+    /* Table */
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th{text-align:left;padding:10px 12px;background:#f8fafc;color:#64748b;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:0.4px;border-bottom:1px solid #e2e8f0}
+    td{padding:12px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:#f8fafc}
+    /* Badges */
+    .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+    .badge-pending{background:#fef3c7;color:#d97706}
+    .badge-active{background:#dcfce7;color:#16a34a}
+    .badge-cancelled{background:#fee2e2;color:#dc2626}
+    .badge-inprogress{background:#dbeafe;color:#2563eb}
+    .badge-resolved{background:#dcfce7;color:#16a34a}
+    .badge-internship{background:#f0f9ff;color:#0284c7}
+    .badge-fulltime{background:#f0fdf4;color:#15803d}
+    .badge-parttime{background:#fdf4ff;color:#9333ea}
+    .badge-contract{background:#fff7ed;color:#ea580c}
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+    .btn-green{background:#dcfce7;color:#16a34a}.btn-green:hover{background:#bbf7d0}
+    .btn-red{background:#fee2e2;color:#dc2626}.btn-red:hover{background:#fecaca}
+    .btn-blue{background:#dbeafe;color:#2563eb}.btn-blue:hover{background:#bfdbfe}
+    .btn-sky{background:#0ea5e9;color:#fff}.btn-sky:hover{background:#0284c7}
+    .btn-gray{background:#f1f5f9;color:#64748b}.btn-gray:hover{background:#e2e8f0}
+    .btn:disabled{opacity:0.5;cursor:not-allowed}
+    /* Search */
+    .search-bar{display:flex;gap:10px;margin-bottom:16px}
+    .search-bar input{flex:1;padding:9px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;outline:none}
+    .search-bar input:focus{border-color:#0ea5e9}
+    /* Form */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{display:flex;flex-direction:column;gap:6px}
+    .form-group.full{grid-column:1/-1}
+    .form-group label{font-size:12px;font-weight:600;color:#0c1b33}
+    .form-group input,.form-group select,.form-group textarea{padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;outline:none;font-family:inherit}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#0ea5e9}
+    .form-group textarea{resize:vertical;min-height:80px}
+    /* Modal */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center}
+    .modal-overlay.open{display:flex}
+    .modal{background:#fff;border-radius:16px;padding:28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+    .modal h3{font-size:17px;font-weight:700;margin-bottom:18px;color:#0c1b33}
+    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+    /* Alert */
+    .alert{padding:12px 16px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+    .alert-success{background:#dcfce7;color:#16a34a}
+    .alert-error{background:#fee2e2;color:#dc2626}
+    /* Empty */
+    .empty{text-align:center;padding:40px;color:#94a3b8;font-size:13px}
+    /* Loading */
+    .loading{text-align:center;padding:30px;color:#94a3b8;font-size:13px}
+    /* Responsive */
+    @media(max-width:768px){.sidebar{width:200px}.main{margin-left:200px;padding:16px}.stats-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+ 
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h2>Nexa<span>Core</span></h2>
+    <p>Admin Dashboard</p>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-item active" onclick="showSection('overview')"><i class="fa-solid fa-chart-pie"></i> Overview</div>
+    <div class="nav-item" onclick="showSection('users')"><i class="fa-solid fa-users"></i> Users</div>
+    <div class="nav-item" onclick="showSection('services')"><i class="fa-solid fa-briefcase"></i> Services</div>
+    <div class="nav-item" onclick="showSection('team')"><i class="fa-solid fa-headset"></i> Team Connect</div>
+    <div class="nav-item" onclick="showSection('jobs')"><i class="fa-solid fa-file-lines"></i> Job Postings</div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
+  </div>
+</aside>
+ 
+<!-- Main -->
+<main class="main">
+ 
+  <!-- Overview -->
+  <section class="section active" id="sec-overview">
+    <div class="page-header"><h1>Overview</h1><p>Platform summary at a glance.</p></div>
+    <div class="stats-grid" id="statsGrid"><div class="loading">Loading stats...</div></div>
+    <div class="card">
+      <div class="card-header"><h3>Recent Service Requests</h3></div>
+      <div class="table-wrap" id="recentServices"><div class="loading">Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3>Recent Team Connect Requests</h3></div>
+      <div class="table-wrap" id="recentTeam"><div class="loading">Loading...</div></div>
+    </div>
+  </section>
+ 
+  <!-- Users -->
+  <section class="section" id="sec-users">
+    <div class="page-header"><h1>Users</h1><p>Manage all registered users.</p></div>
+    <div class="card">
+      <div class="search-bar">
+        <input type="text" id="userSearch" placeholder="Search by name or email..." oninput="searchUsers()"/>
+      </div>
+      <div class="table-wrap" id="usersTable"><div class="loading">Loading...</div></div>
+    </div>
+  </section>
+ 
+  <!-- Services -->
+  <section class="section" id="sec-services">
+    <div class="page-header"><h1>Service Requests</h1><p>Accept or cancel user service requests.</p></div>
+    <div class="card">
+      <div class="table-wrap" id="servicesTable"><div class="loading">Loading...</div></div>
+    </div>
+  </section>
+ 
+  <!-- Team Connect -->
+  <section class="section" id="sec-team">
+    <div class="page-header"><h1>Team Connect</h1><p>Manage and reply to team connect requests.</p></div>
+    <div class="card">
+      <div class="table-wrap" id="teamTable"><div class="loading">Loading...</div></div>
+    </div>
+  </section>
+ 
+  <!-- Jobs -->
+  <section class="section" id="sec-jobs">
+    <div class="page-header"><h1>Job Postings</h1><p>Create, edit, and delete job listings shown on the careers page.</p></div>
+    <div class="card">
+      <div class="card-header">
+        <h3>All Jobs</h3>
+        <button class="btn btn-sky" onclick="openJobModal()"><i class="fa-solid fa-plus"></i> Add Job</button>
+      </div>
+      <div class="alert alert-success" id="jobAlert"></div>
+      <div class="table-wrap" id="jobsTable"><div class="loading">Loading...</div></div>
+    </div>
+  </section>
+ 
+</main>
+ 
+<!-- Reply Modal -->
+<div class="modal-overlay" id="replyModal">
+  <div class="modal">
+    <h3><i class="fa-solid fa-reply"></i> Reply to User</h3>
+    <p style="font-size:13px;color:#64748b;margin-bottom:16px;" id="replyUserInfo"></p>
+    <div class="form-group">
+      <label>Your Message</label>
+      <textarea id="replyMessage" rows="5" placeholder="Type your reply here..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-gray" onclick="closeModal('replyModal')">Cancel</button>
+      <button class="btn btn-sky" onclick="sendReply()">Send Reply</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- Job Modal -->
+<div class="modal-overlay" id="jobModal">
+  <div class="modal">
+    <h3 id="jobModalTitle">Add Job Posting</h3>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Job Title</label>
+        <input type="text" id="jobTitle" placeholder="e.g. Frontend Developer"/>
+      </div>
+      <div class="form-group">
+        <label>Type</label>
+        <select id="jobType">
+          <option>Full Time</option>
+          <option>Part Time</option>
+          <option>Internship</option>
+          <option>Contract</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" id="jobDept" placeholder="e.g. Engineering"/>
+      </div>
+      <div class="form-group full">
+        <label>Description</label>
+        <textarea id="jobDesc" rows="4" placeholder="Describe the role..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="jobActive">
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+    </div>
+    <div class="alert alert-error" id="jobModalError"></div>
+    <div class="modal-actions">
+      <button class="btn btn-gray" onclick="closeModal('jobModal')">Cancel</button>
+      <button class="btn btn-sky" id="jobSaveBtn" onclick="saveJob()">Save Job</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- Cancel Reason Modal -->
+<div class="modal-overlay" id="cancelModal">
+  <div class="modal">
+    <h3>Cancel Service</h3>
+    <div class="form-group">
+      <label>Reason (optional)</label>
+      <input type="text" id="cancelReason" placeholder="e.g. Not eligible"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-gray" onclick="closeModal('cancelModal')">Back</button>
+      <button class="btn btn-red" onclick="confirmCancel()">Cancel Service</button>
+    </div>
+  </div>
+</div>
+ 
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+let allUsers = [], allServices = [], allTeam = [], allJobs = [];
+let editJobId = null, replyConnectId = null, cancelServiceId = null;
+ 
+// ── Auth check ────────────────────────────────────────────────────────────────
+async function checkAuth() {
+  try {
+    const res = await fetch('/api/admin/me', { credentials: 'include' });
+    if (!res.ok) window.location.replace('/admin-login.html');
+  } catch (e) { window.location.replace('/admin-login.html'); }
+}
+ 
+// ── Logout ────────────────────────────────────────────────────────────────────
+async function adminLogout() {
+  await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' });
+  window.location.replace('/admin-login.html');
+}
+ 
+// ── Navigation ────────────────────────────────────────────────────────────────
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (name === 'overview') loadOverview();
+  if (name === 'users')    loadUsers();
+  if (name === 'services') loadServices();
+  if (name === 'team')     loadTeam();
+  if (name === 'jobs')     loadJobs();
+}
+ 
+// ── API helper ────────────────────────────────────────────────────────────────
+async function api(url, options = {}) {
+  const res = await fetch(url, { credentials: 'include', headers: { 'Content-Type': 'application/json' }, ...options });
+  return res.json();
+}
+ 
+// ── Overview ──────────────────────────────────────────────────────────────────
+async function loadOverview() {
+  const [statsData, servData, teamData] = await Promise.all([
+    api('/api/admin/stats'),
+    api('/api/admin/services'),
+    api('/api/admin/team')
+  ]);
+ 
+  if (statsData.success) {
+    const s = statsData.stats;
+    document.getElementById('statsGrid').innerHTML = `
+      <div class="stat-card"><div class="icon"><i class="fa-solid fa-users"></i></div><div class="label">Total Users</div><div class="value">${s.users}</div></div>
+      <div class="stat-card"><div class="icon"><i class="fa-solid fa-briefcase"></i></div><div class="label">Service Requests</div><div class="value">${s.services}</div></div>
+      <div class="stat-card"><div class="icon"><i class="fa-solid fa-clock"></i></div><div class="label">Pending Services</div><div class="value">${s.pending}</div></div>
+      <div class="stat-card"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><div class="label">Active Services</div><div class="value">${s.active}</div></div>
+      <div class="stat-card"><div class="icon"><i class="fa-solid fa-headset"></i></div><div class="label">Team Connects</div><div class="value">${s.connects}</div></div>
+      <div class="stat-card"><div class="icon"><i class="fa-solid fa-file-lines"></i></div><div class="label">Active Jobs</div><div class="value">${s.jobs}</div></div>
+    `;
+  }
+ 
+  if (servData.success) {
+    const recent = servData.services.slice(0, 5);
+    document.getElementById('recentServices').innerHTML = recent.length
+      ? `<table><thead><tr><th>User</th><th>Service</th><th>Status</th><th>Date</th></tr></thead><tbody>
+          ${recent.map(s => `<tr>
+            <td>${s.userId?.name || 'N/A'} <span style="color:#94a3b8;font-size:11px;">${s.userId?.email || ''}</span></td>
+            <td>${s.serviceId}</td>
+            <td>${statusBadge(s.status)}</td>
+            <td>${new Date(s.createdAt).toLocaleDateString()}</td>
+          </tr>`).join('')}
+        </tbody></table>`
+      : '<div class="empty">No service requests yet.</div>';
+  }
+ 
+  if (teamData.success) {
+    const recent = teamData.connects.slice(0, 5);
+    document.getElementById('recentTeam').innerHTML = recent.length
+      ? `<table><thead><tr><th>User</th><th>Department</th><th>Status</th><th>Date</th></tr></thead><tbody>
+          ${recent.map(c => `<tr>
+            <td>${c.userName} <span style="color:#94a3b8;font-size:11px;">${c.userEmail}</span></td>
+            <td>${c.department}</td>
+            <td>${teamBadge(c.status)}</td>
+            <td>${new Date(c.createdAt).toLocaleDateString()}</td>
+          </tr>`).join('')}
+        </tbody></table>`
+      : '<div class="empty">No team connect requests yet.</div>';
+  }
+}
+ 
+// ── Users ──────────────────────────────────────────────────────────────────────
+async function loadUsers() {
+  const data = await api('/api/admin/users');
+  allUsers = data.users || [];
+  renderUsers(allUsers);
+}
+ 
+function searchUsers() {
+  const q = document.getElementById('userSearch').value.toLowerCase();
+  renderUsers(allUsers.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)));
+}
+ 
+function renderUsers(users) {
+  document.getElementById('usersTable').innerHTML = users.length
+    ? `<table><thead><tr><th>Name</th><th>Email</th><th>Verified</th><th>Role</th><th>Joined</th><th>Action</th></tr></thead><tbody>
+        ${users.map(u => `<tr>
+          <td>${u.name}</td>
+          <td>${u.email}</td>
+          <td>${u.isVerified ? '<span class="badge badge-active">Yes</span>' : '<span class="badge badge-cancelled">No</span>'}</td>
+          <td>${u.role || 'client'}</td>
+          <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+          <td><button class="btn btn-red" onclick="deleteUser('${u._id}','${u.name}')"><i class="fa-solid fa-trash"></i> Delete</button></td>
+        </tr>`).join('')}
+      </tbody></table>`
+    : '<div class="empty">No users found.</div>';
+}
+ 
+async function deleteUser(id, name) {
+  if (!confirm(`Delete user "${name}" and all their data? This cannot be undone.`)) return;
+  const data = await api(`/api/admin/users/${id}`, { method: 'DELETE' });
+  if (data.success) { loadUsers(); loadOverview(); }
+  else alert(data.message);
+}
+ 
+// ── Services ───────────────────────────────────────────────────────────────────
+async function loadServices() {
+  const data = await api('/api/admin/services');
+  allServices = data.services || [];
+  renderServices(allServices);
+}
+ 
+function renderServices(services) {
+  document.getElementById('servicesTable').innerHTML = services.length
+    ? `<table><thead><tr><th>User</th><th>Service</th><th>Status</th><th>Requested</th><th>Actions</th></tr></thead><tbody>
+        ${services.map(s => `<tr>
+          <td>${s.userId?.name || 'N/A'}<br/><span style="color:#94a3b8;font-size:11px;">${s.userId?.email || ''}</span></td>
+          <td><strong>${s.serviceId}</strong></td>
+          <td>${statusBadge(s.status)}</td>
+          <td>${new Date(s.createdAt).toLocaleDateString()}</td>
+          <td style="display:flex;gap:6px;flex-wrap:wrap;">
+            ${s.status === 'pending' ? `
+              <button class="btn btn-green" onclick="acceptService('${s._id}')"><i class="fa-solid fa-check"></i> Accept</button>
+              <button class="btn btn-red" onclick="openCancelModal('${s._id}')"><i class="fa-solid fa-xmark"></i> Cancel</button>
+            ` : s.status === 'active' ? `
+              <button class="btn btn-red" onclick="openCancelModal('${s._id}')"><i class="fa-solid fa-xmark"></i> Cancel</button>
+            ` : '<span style="color:#94a3b8;font-size:12px;">No actions</span>'}
+          </td>
+        </tr>`).join('')}
+      </tbody></table>`
+    : '<div class="empty">No service requests yet.</div>';
+}
+ 
+async function acceptService(id) {
+  const data = await api(`/api/admin/services/${id}/accept`, { method: 'PATCH', body: JSON.stringify({}) });
+  if (data.success) loadServices();
+  else alert(data.message);
+}
+ 
+function openCancelModal(id) {
+  cancelServiceId = id;
+  document.getElementById('cancelReason').value = '';
+  document.getElementById('cancelModal').classList.add('open');
+}
+ 
+async function confirmCancel() {
+  const reason = document.getElementById('cancelReason').value;
+  const data = await api(`/api/admin/services/${cancelServiceId}/cancel`, { method: 'PATCH', body: JSON.stringify({ reason }) });
+  closeModal('cancelModal');
+  if (data.success) loadServices();
+  else alert(data.message);
+}
+ 
+// ── Team Connect ───────────────────────────────────────────────────────────────
+async function loadTeam() {
+  const data = await api('/api/admin/team');
+  allTeam = data.connects || [];
+  renderTeam(allTeam);
+}
+ 
+function renderTeam(connects) {
+  document.getElementById('teamTable').innerHTML = connects.length
+    ? `<table><thead><tr><th>User</th><th>Department</th><th>Contact</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+        ${connects.map(c => `<tr>
+          <td>${c.userName}<br/><span style="color:#94a3b8;font-size:11px;">${c.userEmail}</span></td>
+          <td>${c.department}</td>
+          <td>${c.preferredContact}</td>
+          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${c.message}">${c.message}</td>
+          <td>
+            <select onchange="updateTeamStatus('${c._id}', this.value)" style="padding:5px 8px;border:1.5px solid #e2e8f0;border-radius:6px;font-size:12px;outline:none;">
+              <option value="pending" ${c.status==='pending'?'selected':''}>Pending</option>
+              <option value="in-progress" ${c.status==='in-progress'?'selected':''}>In Progress</option>
+              <option value="resolved" ${c.status==='resolved'?'selected':''}>Resolved</option>
+            </select>
+          </td>
+          <td><button class="btn btn-blue" onclick="openReplyModal('${c._id}','${c.userName}','${c.userEmail}')"><i class="fa-solid fa-reply"></i> Reply</button></td>
+        </tr>`).join('')}
+      </tbody></table>`
+    : '<div class="empty">No team connect requests yet.</div>';
+}
+ 
+async function updateTeamStatus(id, status) {
+  await api(`/api/admin/team/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) });
+}
+ 
+function openReplyModal(id, name, email) {
+  replyConnectId = id;
+  document.getElementById('replyUserInfo').textContent = `Replying to: ${name} (${email})`;
+  document.getElementById('replyMessage').value = '';
+  document.getElementById('replyModal').classList.add('open');
+}
+ 
+async function sendReply() {
+  const message = document.getElementById('replyMessage').value.trim();
+  if (!message) { alert('Please enter a message.'); return; }
+  const data = await api(`/api/admin/team/${replyConnectId}/reply`, { method: 'POST', body: JSON.stringify({ message }) });
+  closeModal('replyModal');
+  if (data.success) { alert('Reply sent successfully.'); loadTeam(); }
+  else alert(data.message);
+}
+ 
+// ── Jobs ───────────────────────────────────────────────────────────────────────
+async function loadJobs() {
+  const data = await api('/api/admin/jobs');
+  allJobs = data.jobs || [];
+  renderJobs(allJobs);
+}
+ 
+function renderJobs(jobs) {
+  document.getElementById('jobsTable').innerHTML = jobs.length
+    ? `<table><thead><tr><th>Title</th><th>Type</th><th>Department</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+        ${jobs.map(j => `<tr>
+          <td><strong>${j.title}</strong><br/><span style="color:#64748b;font-size:11px;">${j.description.substring(0,60)}...</span></td>
+          <td>${typeBadge(j.type)}</td>
+          <td>${j.department}</td>
+          <td>${j.isActive ? '<span class="badge badge-active">Active</span>' : '<span class="badge badge-cancelled">Inactive</span>'}</td>
+          <td style="display:flex;gap:6px;">
+            <button class="btn btn-blue" onclick="openJobModal('${j._id}')"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-red" onclick="deleteJob('${j._id}')"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>`).join('')}
+      </tbody></table>`
+    : '<div class="empty">No job postings yet. Add one above.</div>';
+}
+ 
+function openJobModal(id) {
+  editJobId = id || null;
+  document.getElementById('jobModalTitle').textContent = id ? 'Edit Job Posting' : 'Add Job Posting';
+  document.getElementById('jobModalError').style.display = 'none';
+ 
+  if (id) {
+    const job = allJobs.find(j => j._id === id);
+    if (job) {
+      document.getElementById('jobTitle').value = job.title;
+      document.getElementById('jobType').value  = job.type;
+      document.getElementById('jobDept').value  = job.department;
+      document.getElementById('jobDesc').value  = job.description;
+      document.getElementById('jobActive').value = String(job.isActive);
+    }
+  } else {
+    document.getElementById('jobTitle').value = '';
+    document.getElementById('jobType').value  = 'Full Time';
+    document.getElementById('jobDept').value  = '';
+    document.getElementById('jobDesc').value  = '';
+    document.getElementById('jobActive').value = 'true';
+  }
+ 
+  document.getElementById('jobModal').classList.add('open');
+}
+ 
+async function saveJob() {
+  const title       = document.getElementById('jobTitle').value.trim();
+  const type        = document.getElementById('jobType').value;
+  const department  = document.getElementById('jobDept').value.trim();
+  const description = document.getElementById('jobDesc').value.trim();
+  const isActive    = document.getElementById('jobActive').value === 'true';
+  const errEl       = document.getElementById('jobModalError');
+ 
+  if (!title || !department || !description) {
+    errEl.textContent = 'Please fill all fields.';
+    errEl.style.display = 'block';
+    return;
+  }
+ 
+  const btn = document.getElementById('jobSaveBtn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+ 
+  const url    = editJobId ? `/api/admin/jobs/${editJobId}` : '/api/admin/jobs';
+  const method = editJobId ? 'PATCH' : 'POST';
+  const data   = await api(url, { method, body: JSON.stringify({ title, type, department, description, isActive }) });
+ 
+  btn.disabled = false; btn.textContent = 'Save Job';
+ 
+  if (data.success) {
+    closeModal('jobModal');
+    const alertEl = document.getElementById('jobAlert');
+    alertEl.textContent = editJobId ? 'Job updated.' : 'Job created.';
+    alertEl.style.display = 'block';
+    setTimeout(() => alertEl.style.display = 'none', 3000);
+    loadJobs();
+  } else {
+    errEl.textContent = data.message;
+    errEl.style.display = 'block';
+  }
+}
+ 
+async function deleteJob(id) {
+  if (!confirm('Delete this job posting?')) return;
+  const data = await api(`/api/admin/jobs/${id}`, { method: 'DELETE' });
+  if (data.success) loadJobs();
+  else alert(data.message);
+}
+ 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+ 
+function statusBadge(s) {
+  if (s === 'pending')   return '<span class="badge badge-pending">Pending</span>';
+  if (s === 'active')    return '<span class="badge badge-active">Active</span>';
+  if (s === 'cancelled') return '<span class="badge badge-cancelled">Cancelled</span>';
+  return s;
+}
+ 
+function teamBadge(s) {
+  if (s === 'pending')     return '<span class="badge badge-pending">Pending</span>';
+  if (s === 'in-progress') return '<span class="badge badge-inprogress">In Progress</span>';
+  if (s === 'resolved')    return '<span class="badge badge-resolved">Resolved</span>';
+  return s;
+}
+ 
+function typeBadge(t) {
+  if (t === 'Full Time')   return '<span class="badge badge-fulltime">Full Time</span>';
+  if (t === 'Part Time')   return '<span class="badge badge-parttime">Part Time</span>';
+  if (t === 'Internship')  return '<span class="badge badge-internship">Internship</span>';
+  if (t === 'Contract')    return '<span class="badge badge-contract">Contract</span>';
+  return t;
+}
+ 
+// ── Init ──────────────────────────────────────────────────────────────────────
+checkAuth().then(() => loadOverview());
+</script>
+</body>
+</html>
+ 
