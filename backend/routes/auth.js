@@ -1,4 +1,7 @@
 const express  = require('express');
+const rateLimit = require('express-rate-limit');
+const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 });
+const otpLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5 });
 const jwt      = require('jsonwebtoken');
 const crypto   = require('crypto');
 const { body, validationResult } = require('express-validator');
@@ -54,7 +57,7 @@ router.post('/signup', [
     }
 
     // Generate OTP
-    const otp       = Math.floor(100000 + Math.random() * 900000).toString();
+    const otp = crypto.randomInt(100000, 999999).toString();
     const expiresAt = new Date(Date.now() + (Number(process.env.OTP_EXPIRY_MINUTES) || 10) * 60 * 1000);
 
     // Create unverified user
@@ -134,7 +137,7 @@ router.post('/verify-otp', [
 });
 
 // ─── POST /api/auth/resend-otp ───────────────────────────────────────────────
-router.post('/resend-otp', [
+router.post('/resend-otp', otpLimiter, [
   body('userId').notEmpty()
 ], async (req, res) => {
   const { userId } = req.body;
@@ -144,9 +147,9 @@ router.post('/resend-otp', [
       return res.status(400).json({ success: false, message: 'Invalid request.' });
     }
 
-    const otp       = Math.floor(100000 + Math.random() * 900000).toString();
+    const otp = crypto.randomInt(100000, 999999).toString();
     const expiresAt = new Date(Date.now() + (Number(process.env.OTP_EXPIRY_MINUTES) || 10) * 60 * 1000);
-    user.otp        = { code: otp, expiresAt };
+    user.otp = { code: otp, expiresAt };
     await user.save();
 
     const result = await sendOTPEmail(user.email, user.name, otp);
@@ -164,7 +167,7 @@ router.post('/resend-otp', [
 
 // ─── POST /api/auth/login ────────────────────────────────────────────────────
 // No OTP required — user is already registered and verified
-router.post('/login', [
+router.post('/login', loginLimiter, [
   body('email').trim().isEmail().withMessage('Valid email required').normalizeEmail(),
   body('password').notEmpty().withMessage('Password is required')
 ], async (req, res) => {
