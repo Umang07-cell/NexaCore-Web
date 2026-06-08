@@ -1,10 +1,10 @@
 const express     = require('express');
 const jwt         = require('jsonwebtoken');
 const rateLimit   = require('express-rate-limit');
-const User        = require('../models/User');
-const Service     = require('../models/Service');
-const TeamConnect = require('../models/TeamConnect');
-const Job         = require('../models/Job');
+const User        = require('./models/User');
+const Service     = require('./models/Service');
+const TeamConnect = require('./models/TeamConnect');
+const Job         = require('./models/Job');
 const { sendAdminNotification, sendAdminReply } = require('../utils/mailer');
  
 const router = express.Router();
@@ -52,7 +52,7 @@ router.post('/logout', (req, res) => {
 });
  
 // ── Admin auth middleware (all routes below are protected) ───────────────────
-const adminAuth = require('../middleware/adminAuth');
+const adminAuth = require('./middleware/adminAuth');
 router.use(adminAuth);
  
 // ── Check admin session ──────────────────────────────────────────────────────
