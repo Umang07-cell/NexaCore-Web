@@ -4,7 +4,7 @@ const rateLimit   = require('express-rate-limit');
 const User        = require('../models/User');
 const Service     = require('../models/Service');
 const TeamConnect = require('../models/TeamConnect');
-const Job         = require('../models/Job');
+const Job         = require('../models/job');
 const { sendAdminNotification, sendAdminReply } = require('../utils/mailer');
  
 const router = express.Router();
