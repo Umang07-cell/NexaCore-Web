@@ -1,6 +1,4 @@
 const express = require('express');
-const fs      = require('fs');
-const path    = require('path');
 const { body, validationResult } = require('express-validator');
 const { sendContactEmail } = require('../utils/mailer');
 
@@ -19,13 +17,6 @@ router.post('/', [
 
   const { name, email, subject, message } = req.body;
   const payload = { name, email, subject, message, receivedAt: new Date().toISOString() };
-
-  // Save to local file as backup
-  try {
-    const dir = path.join(__dirname, '..', 'messages');
-    fs.mkdirSync(dir, { recursive: true });
-    fs.appendFileSync(path.join(dir, 'contact-submissions.jsonl'), JSON.stringify(payload) + '\n');
-  } catch (e) { /* non-fatal */ }
 
   try {
     await sendContactEmail({ name, email, subject, message });
