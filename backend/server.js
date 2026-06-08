@@ -25,7 +25,18 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/nexacore')
   .catch(err => { console.error('❌  MongoDB error:', err.message); process.exit(1); });
  
 // ── Security middleware ──────────────────────────────────────────────────────
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com", "fonts.googleapis.com"],
+      fontSrc: ["'self'", "cdnjs.cloudflare.com", "fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:"],
+      connectSrc: ["'self'"]
+    }
+  }
+}));
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000', credentials: true }));
 app.use(cookieParser());
 app.use(express.json({ limit: '10kb' }));
