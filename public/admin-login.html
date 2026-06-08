@@ -32,57 +32,10 @@
     <input type="email" id="adminEmail" placeholder="Email address" autocomplete="off"/>
     <label>Password</label>
     <input type="password" id="adminPassword" placeholder="Password" autocomplete="off"/>
-    <button id="loginBtn" onclick="adminLogin()">Sign In</button>
+    <button id="loginBtn">Sign In</button>
   </div>
-
-  <script>
-    fetch('/api/admin/me', { credentials: 'include' })
-      .then(r => r.json())
-      .then(d => { if (d.success) window.location.replace('/admin.html'); })
-      .catch(() => {});
-
-    async function adminLogin() {
-      const email    = document.getElementById('adminEmail').value.trim();
-      const password = document.getElementById('adminPassword').value;
-      const errorEl  = document.getElementById('errorMsg');
-      const btn      = document.getElementById('loginBtn');
-
-      errorEl.style.display = 'none';
-      if (!email || !password) {
-        errorEl.textContent = 'Please enter email and password.';
-        errorEl.style.display = 'block';
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = 'Signing in...';
-
-      try {
-        const res = await fetch('/api/admin/login', {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-          errorEl.textContent = data.message || 'Invalid credentials.';
-          errorEl.style.display = 'block';
-          btn.disabled = false;
-          btn.textContent = 'Sign In';
-          return;
-        }
-        window.location.replace('/admin.html');
-      } catch (e) {
-        errorEl.textContent = 'Network error. Try again.';
-        errorEl.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Sign In';
-      }
-    }
-
-    document.addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
-  </script>
+ 
+  <script src="JS/admin-login.js"></script>
 </body>
 </html>
+ 
