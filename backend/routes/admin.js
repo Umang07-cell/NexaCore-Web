@@ -52,7 +52,7 @@ router.post('/logout', (req, res) => {
 });
  
 // ── Admin auth middleware (all routes below are protected) ───────────────────
-const adminAuth = require('./middleware/adminAuth');
+const adminAuth = require('../middleware/adminAuth');
 router.use(adminAuth);
  
 // ── Check admin session ──────────────────────────────────────────────────────
