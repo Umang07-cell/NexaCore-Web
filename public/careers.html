@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="CSS/pages.css">
   <link rel="stylesheet" href="CSS/responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head><body>
+</head>
+<body>
 <nav class="navbar" id="navbar">
   <a class="logo" href="index.html">Nexa<span>Core</span></a>
   <ul class="nav-links">
-    <li><a class="" href="services.html">Services</a></li>
+    <li><a href="services.html">Services</a></li>
     <li><a class="active" href="careers.html">Careers</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -21,7 +22,43 @@
     <a href="login.html" class="nav-btn">Login</a>
     <a href="signup.html" class="nav-btn signup-btn">Sign Up</a>
   </div>
-</nav><section class="page-hero careers-hero"><div class="page-kicker"><i class="fa-solid fa-briefcase"></i> Careers</div><h1>Build Useful Technology With NexaCore</h1><p>Join a team working across software, cloud, support, and automation for clients who value reliable execution.</p><div class="page-actions"><a class="btn-primary" href="mailto:careers@nexacore.com">Apply Now</a><a class="btn-secondary" href="index.html#contact">Ask a Question</a></div></section><section class="jobs-section"><div class="section-header"><div class="section-label">Open Roles</div><h2>Current Opportunities</h2><p>Send your resume with the role title in the subject line.</p></div><div class="job-grid"><div class="job-card"><span>Internship</span><h3>Software Engineer Intern</h3><p>Work on frontend and backend features with senior engineering guidance.</p><a href="mailto:careers@nexacore.com?subject=Software Engineer Intern">Apply</a></div><div class="job-card"><span>Full Time</span><h3>Frontend Developer</h3><p>Create polished, responsive interfaces for business-critical applications.</p><a href="mailto:careers@nexacore.com?subject=Frontend Developer">Apply</a></div><div class="job-card"><span>Full Time</span><h3>Backend Developer</h3><p>Build APIs, integrations, data workflows, and reliable service foundations.</p><a href="mailto:careers@nexacore.com?subject=Backend Developer">Apply</a></div></div></section><section class="culture-section"><div><div class="section-label">Culture</div><h2>Practical, Calm, and Client-Focused</h2><p>We value clear communication, ownership, learning, and shipping work that makes life easier for the teams who use it.</p></div><div class="culture-list"><span>Mentorship</span><span>Remote-friendly workflows</span><span>Modern tools</span><span>Client impact</span></div></section>
+</nav>
+ 
+<section class="page-hero careers-hero">
+  <div class="page-kicker"><i class="fa-solid fa-briefcase"></i> Careers</div>
+  <h1>Build Useful Technology With NexaCore</h1>
+  <p>Join a team working across software, cloud, support, and automation for clients who value reliable execution.</p>
+  <div class="page-actions">
+    <a class="btn-primary" href="mailto:careers@nexacore.com">Apply Now</a>
+    <a class="btn-secondary" href="index.html#contact">Ask a Question</a>
+  </div>
+</section>
+ 
+<section class="jobs-section">
+  <div class="section-header">
+    <div class="section-label">Open Roles</div>
+    <h2>Current Opportunities</h2>
+    <p>Send your resume with the role title in the subject line.</p>
+  </div>
+  <div class="job-grid" id="jobGrid">
+    <div style="text-align:center;padding:40px;color:#64748b;">Loading opportunities...</div>
+  </div>
+</section>
+ 
+<section class="culture-section">
+  <div>
+    <div class="section-label">Culture</div>
+    <h2>Practical, Calm, and Client-Focused</h2>
+    <p>We value clear communication, ownership, learning, and shipping work that makes life easier for the teams who use it.</p>
+  </div>
+  <div class="culture-list">
+    <span>Mentorship</span>
+    <span>Remote-friendly workflows</span>
+    <span>Modern tools</span>
+    <span>Client impact</span>
+  </div>
+</section>
+ 
 <footer>
   <div class="footer-brand">
     <a class="logo" href="index.html" style="color:white;">Nexa<span>Core</span></a>
@@ -53,4 +90,34 @@
     </ul>
   </div>
 </footer>
-<div class="footer-bottom">&copy; 2026 NexaCore Technologies. All rights reserved.</div><script src="JS/script.js"></script></body></html>
+<div class="footer-bottom">&copy; 2026 NexaCore Technologies. All rights reserved.</div>
+ 
+<script src="JS/script.js"></script>
+<script>
+async function loadJobs() {
+  const grid = document.getElementById('jobGrid');
+  try {
+    const res  = await fetch('/api/jobs');
+    const data = await res.json();
+    if (!data.success || !data.jobs.length) {
+      grid.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b;">No open positions at the moment. Check back soon.</div>';
+      return;
+    }
+    grid.innerHTML = data.jobs.map(job => `
+      <div class="job-card">
+        <span>${job.type}</span>
+        <h3>${job.title}</h3>
+        <p style="font-size:13px;color:#0ea5e9;margin-bottom:8px;">${job.department}</p>
+        <p>${job.description}</p>
+        <a href="mailto:careers@nexacore.com?subject=${encodeURIComponent(job.title)}">Apply</a>
+      </div>
+    `).join('');
+  } catch (err) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b;">Could not load jobs. Please try again later.</div>';
+  }
+}
+loadJobs();
+</script>
+</body>
+</html>
+ 
