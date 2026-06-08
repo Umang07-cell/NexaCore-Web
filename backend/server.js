@@ -50,18 +50,7 @@ app.use('/api/contact',  contactRoutes);
 app.use('/api/user',     userRoutes);
 app.use('/api/team',     teamRoutes);
 app.use('/api/admin',    adminRoutes);
- 
-// ── Public jobs endpoint (for careers.html) ───────────────────────────────
-const Job = require('./models/Job');
-app.get('/api/jobs', async (req, res) => {
-  try {
-    const jobs = await Job.find({ isActive: true }).sort({ createdAt: -1 }).lean();
-    res.json({ success: true, jobs });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error.' });
-  }
-});
- 
+  
 // ── Serve static frontend ────────────────────────────────────────────────────
 const publicDir = path.join(__dirname, '..', 'public');
 app.use(express.static(publicDir));
