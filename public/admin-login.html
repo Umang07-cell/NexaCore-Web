@@ -36,7 +36,6 @@
   </div>
 
   <script>
-    // Redirect if already logged in
     fetch('/api/admin/me', { credentials: 'include' })
       .then(r => r.json())
       .then(d => { if (d.success) window.location.replace('/admin.html'); })
@@ -59,7 +58,7 @@
       btn.textContent = 'Signing in...';
 
       try {
-        const res  = await fetch('/api/admin/login', {
+        const res = await fetch('/api/admin/login', {
           method: 'POST',
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
