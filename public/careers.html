@@ -3,121 +3,289 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Careers | NexaCore</title>
-  <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/pages.css">
-  <link rel="stylesheet" href="CSS/responsive.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Careers | NexaCore Technologies</title>
+  <meta name="description" content="Build enterprise technology with experienced engineers and consultants. Explore open roles at NexaCore Technologies."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    .jobs-section { padding: var(--section-y) 0; background: var(--white); }
+    .jobs-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 56px; }
+    #jobGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 52px; }
+    .job-card {
+      padding: 32px; border: 1.5px solid var(--border); border-radius: 14px;
+      transition: all var(--dur-med) var(--ease);
+      display: flex; flex-direction: column;
+    }
+    .job-card:hover { border-color: var(--azure); box-shadow: 0 16px 40px rgba(0,87,255,.07); transform: translateY(-2px); }
+    .job-card-top { display: flex; gap: 8px; margin-bottom: 12px; }
+    .job-type {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; background: var(--azure-dim); color: var(--azure);
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .job-dept {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; background: var(--bg); color: var(--muted);
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .job-card h3 { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -.02em; margin-bottom: 10px; }
+    .job-card > p { font-size: 14px; color: var(--muted); line-height: 1.7; flex: 1; }
+    .no-jobs { text-align: center; padding: 60px 24px; grid-column: 1/-1; color: var(--muted); }
+    .no-jobs a { color: var(--azure); }
+    .culture-section { padding: var(--section-y) 0; background: var(--bg); }
+    .culture-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 56px; }
+    .culture-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 52px; }
+    .culture-card { padding: 32px; background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; transition: all var(--dur-med); }
+    .culture-card:hover { border-color: var(--azure); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,87,255,.06); }
+    .culture-icon { width: 44px; height: 44px; background: var(--azure-dim); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--azure); margin-bottom: 16px; }
+    .culture-card h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -.02em; }
+    .culture-card p { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+    @media(max-width:900px){ #jobGrid{grid-template-columns:1fr;padding:0 24px;} .jobs-inner{padding:0 24px;} .culture-inner{padding:0 24px;} .culture-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:600px){ .culture-grid{grid-template-columns:1fr;} }
+  </style>
 </head>
 <body>
-<nav class="navbar" id="navbar">
-  <a class="logo" href="index.html">Nexa<span>Core</span></a>
+<div id="loader"><div class="loader-inner"><div class="loader-logo">Nexa<span>Core</span></div><div class="loader-line"></div></div></div>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html">Nexa<span>Core</span></a>
   <ul class="nav-links">
     <li><a href="services.html">Services</a></li>
-    <li><a class="active" href="careers.html">Careers</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="careers.html" class="active">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <div class="nav-auth">
-    <a href="login.html" class="nav-btn">Login</a>
-    <a href="signup.html" class="nav-btn signup-btn">Sign Up</a>
+  <div class="nav-cta">
+    <a href="#" onclick="event.preventDefault();openScheduleModal()" class="nav-cta-ghost">Schedule Call</a>
+    <a href="get-a-proposal.html" class="nav-cta-solid">Get a Proposal</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
- 
-<section class="page-hero careers-hero">
-  <div class="page-kicker"><i class="fa-solid fa-briefcase"></i> Careers</div>
-  <h1>Build Useful Technology With NexaCore</h1>
-  <p>Join a team working across software, cloud, support, and automation for clients who value reliable execution.</p>
-  <div class="page-actions">
-    <a class="btn-primary" href="mailto:careers@nexacore.com">Apply Now</a>
-    <a class="btn-secondary" href="index.html#contact">Ask a Question</a>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="case-studies.html">Case Studies</a>
+  <a href="careers.html" class="active">Careers</a>
+  <a href="insights.html">Insights</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="get-a-proposal.html">Get a Proposal</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-eyebrow" style="justify-content:center;">Careers</div>
+    <h1>Build enterprise technology<br/>with people who care about craft</h1>
+    <p>We're a senior-led team that ships real systems for demanding clients. No politics, no hand-offs — just experienced engineers solving hard problems well.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:careers@nexacore.com" class="btn btn-primary">Send Your CV <span class="arrow">→</span></a>
+      <a href="#openroles" class="btn btn-outline-white">View Open Roles</a>
+    </div>
   </div>
 </section>
- 
-<section class="jobs-section">
-  <div class="section-header">
-    <div class="section-label">Open Roles</div>
-    <h2>Current Opportunities</h2>
-    <p>Send your resume with the role title in the subject line.</p>
-  </div>
-  <div class="job-grid" id="jobGrid">
-    <div style="text-align:center;padding:40px;color:#64748b;">Loading opportunities...</div>
-  </div>
-</section>
- 
+
+<!-- Culture -->
 <section class="culture-section">
-  <div>
-    <div class="section-label">Culture</div>
-    <h2>Practical, Calm, and Client-Focused</h2>
-    <p>We value clear communication, ownership, learning, and shipping work that makes life easier for the teams who use it.</p>
-  </div>
-  <div class="culture-list">
-    <span>Mentorship</span>
-    <span>Remote-friendly workflows</span>
-    <span>Modern tools</span>
-    <span>Client impact</span>
+  <div class="culture-inner">
+    <div class="section-eyebrow reveal">How We Work</div>
+    <h2 class="section-h2 reveal reveal-delay-1">An environment built for<br/>senior engineers</h2>
+    <div class="culture-grid">
+      <div class="culture-card reveal">
+        <div class="culture-icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></div>
+        <h4>Senior-to-senior work</h4>
+        <p>You'll work alongside architects and engineers with deep enterprise experience. Nobody gets siloed into junior support roles after joining.</p>
+      </div>
+      <div class="culture-card reveal reveal-delay-1">
+        <div class="culture-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
+        <h4>Hard problems only</h4>
+        <p>Our clients come to us because the problem is genuinely difficult. You'll work on migrations, AI systems, compliance-critical platforms — not CRUD apps.</p>
+      </div>
+      <div class="culture-card reveal reveal-delay-2">
+        <div class="culture-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+        <h4>Ownership &amp; accountability</h4>
+        <p>You own your work end-to-end. We don't have layers of management reviewing every decision — we hire people we trust to make good calls independently.</p>
+      </div>
+      <div class="culture-card reveal reveal-delay-3">
+        <div class="culture-icon"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
+        <h4>Remote-first, async-friendly</h4>
+        <p>Our team spans multiple time zones. We default to async communication and trust our people to manage their own time and output.</p>
+      </div>
+      <div class="culture-card reveal reveal-delay-4">
+        <div class="culture-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div>
+        <h4>Continuous learning</h4>
+        <p>Annual learning budget, conference attendance, and a culture of internal knowledge sharing. We stay current because the work demands it.</p>
+      </div>
+      <div class="culture-card reveal reveal-delay-5">
+        <div class="culture-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+        <h4>Fair compensation</h4>
+        <p>We pay at or above market for every role. No lowball offers, no equity cliff manipulation — straightforward compensation with clear progression.</p>
+      </div>
+    </div>
   </div>
 </section>
- 
+
+<!-- Open Roles -->
+<section class="jobs-section" id="openroles">
+  <div class="jobs-inner">
+    <div class="section-eyebrow reveal">Open Roles</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Current opportunities</h2>
+    <p class="section-body-sm reveal reveal-delay-2" style="margin-top:12px;">Don't see a perfect fit? Send your CV to <a href="mailto:careers@nexacore.com" style="color:var(--azure);font-weight:600;">careers@nexacore.com</a> — we hire opportunistically for exceptional candidates.</p>
+    <div id="jobGrid">
+      <div class="no-jobs"><p>Loading opportunities…</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2 class="reveal">Don't see your role listed?</h2>
+    <p class="reveal reveal-delay-1">We hire for exceptional talent across all disciplines. If you're an experienced engineer, architect, or consultant who cares about doing the work properly, we want to hear from you.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="mailto:careers@nexacore.com" class="btn btn-white">Send Your CV</a>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-brand">
-    <a class="logo" href="index.html" style="color:white;">Nexa<span>Core</span></a>
-    <p>Empowering businesses through smart, scalable, and secure technology solutions.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="font-size:19px;">Nexa<span style="color:var(--azure);">Core</span></a>
+      <p>Enterprise IT consulting and technology delivery — from strategy to production-grade systems.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html#software">Software Development</a></li><li><a href="services.html#cloud">Cloud &amp; Infrastructure</a></li><li><a href="services.html#ai">AI &amp; Automation</a></li><li><a href="services.html#support">IT Support</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="about.html#leadership">Leadership</a></li><li><a href="careers.html">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li><li><a href="case-studies.html">Case Studies</a></li></ul></div>
+    <div class="footer-col"><h5>Insights</h5><ul><li><a href="insights.html">AI &amp; Automation</a></li><li><a href="insights.html">Cloud Strategy</a></li><li><a href="insights.html">Security</a></li></ul></div>
+    <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li><li><a href="security.html">Security</a></li></ul></div>
   </div>
-  <div class="footer-col">
-    <h4>Services</h4>
-    <ul>
-      <li><a href="software-development.html">Software Dev</a></li>
-      <li><a href="cloud-infrastructure.html">Cloud & Infra</a></li>
-      <li><a href="it-support.html">IT Support</a></li>
-      <li><a href="ai-automation.html">AI & Automation</a></li>
-    </ul>
-  </div>
-  <div class="footer-col">
-    <h4>Company</h4>
-    <ul>
-      <li><a href="index.html#about">About Us</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </div>
-  <div class="footer-col">
-    <h4>Legal</h4>
-    <ul>
-      <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="terms.html">Terms of Use</a></li>
-      <li><a href="security.html">Security</a></li>
-    </ul>
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">&copy; 2026 NexaCore Technologies, Inc. All rights reserved.</span>
+    <span class="footer-bottom-text"><a href="mailto:hello@nexacore.com" style="color:inherit;">hello@nexacore.com</a></span>
   </div>
 </footer>
-<div class="footer-bottom">&copy; 2026 NexaCore Technologies. All rights reserved.</div>
- 
-<script src="JS/script.js"></script>
-<script>
-async function loadJobs() {
-  const grid = document.getElementById('jobGrid');
-  try {
-    const res  = await fetch('/api/jobs');
-    const data = await res.json();
-    if (!data.success || !data.jobs.length) {
-      grid.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b;">No open positions at the moment. Check back soon.</div>';
-      return;
-    }
-    grid.innerHTML = data.jobs.map(job => `
-      <div class="job-card">
-        <span>${job.type}</span>
-        <h3>${job.title}</h3>
-        <p style="font-size:13px;color:#0ea5e9;margin-bottom:8px;">${job.department}</p>
-        <p>${job.description}</p>
-        <a href="mailto:careers@nexacore.com?subject=${encodeURIComponent(job.title)}">Apply</a>
+<!-- ═══════════════════ APPLICATION MODAL ═══════════════════ -->
+<div id="applyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 28px;border-bottom:1px solid #E1E7F0;">
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0057FF;margin-bottom:6px;">Apply Now</div>
+        <h3 style="font-size:18px;font-weight:700;color:#080C18;letter-spacing:-.02em;" id="applyModalTitle">Position</h3>
       </div>
-    `).join('');
-  } catch (err) {
-    grid.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b;">Could not load jobs. Please try again later.</div>';
-  }
+      <button onclick="closeApplyModal()" style="background:none;border:none;color:#64748B;font-size:20px;cursor:pointer;padding:4px 8px;">✕</button>
+    </div>
+    <form id="applyForm" enctype="multipart/form-data" style="padding:28px;">
+      <input type="hidden" id="apply-jobId"/>
+      <input type="hidden" id="apply-jobTitle"/>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Full Name *</label>
+          <input id="apply-name" type="text" required placeholder="Your full name" style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;"/>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Email *</label>
+          <input id="apply-email" type="email" required placeholder="you@email.com" style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;"/>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Phone</label>
+          <input id="apply-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;"/>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Years of Experience</label>
+          <select id="apply-experience" style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;appearance:none;">
+            <option value="">Select</option>
+            <option>0–1 years</option><option>2–3 years</option><option>4–6 years</option>
+            <option>7–10 years</option><option>10+ years</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">LinkedIn URL</label>
+          <input id="apply-linkedin" type="url" placeholder="https://linkedin.com/in/..." style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;"/>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Portfolio / GitHub</label>
+          <input id="apply-portfolio" type="url" placeholder="https://..." style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;"/>
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Resume / CV (PDF, DOC, DOCX — max 5MB)</label>
+        <input id="apply-resume" type="file" accept=".pdf,.doc,.docx" style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:10px 14px;font-size:14px;font-family:inherit;color:#080C18;"/>
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748B;margin-bottom:7px;">Cover Letter</label>
+        <textarea id="apply-cover" rows="4" placeholder="Tell us why you're a great fit for this role…" style="width:100%;border:1.5px solid #E1E7F0;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;color:#080C18;resize:vertical;"></textarea>
+      </div>
+      <div id="apply-error" style="font-size:13px;color:#DC2626;margin-bottom:12px;display:none;"></div>
+      <div id="apply-success" style="font-size:14px;color:#16A34A;margin-bottom:12px;display:none;text-align:center;padding:14px;background:rgba(22,163,74,.07);border-radius:10px;"></div>
+      <button type="submit" id="apply-submit" style="width:100%;background:#0057FF;color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Submit Application →</button>
+    </form>
+  </div>
+</div>
+
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<script src="JS/main.js"></script>
+<script>
+function openApplyModal(jobId, jobTitle) {
+  document.getElementById('apply-jobId').value = jobId || '';
+  document.getElementById('apply-jobTitle').value = jobTitle || '';
+  document.getElementById('applyModalTitle').textContent = jobTitle || 'Apply';
+  document.getElementById('applyForm').reset();
+  document.getElementById('apply-error').style.display = 'none';
+  document.getElementById('apply-success').style.display = 'none';
+  const m = document.getElementById('applyModal');
+  m.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
-loadJobs();
+function closeApplyModal() {
+  document.getElementById('applyModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('applyModal').addEventListener('click', function(e) {
+  if (e.target === this) closeApplyModal();
+});
+document.getElementById('applyForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('apply-error');
+  const sucEl = document.getElementById('apply-success');
+  const btn = document.getElementById('apply-submit');
+  errEl.style.display = 'none';
+  const name = document.getElementById('apply-name').value.trim();
+  const email = document.getElementById('apply-email').value.trim();
+  if (!name || !email) { errEl.textContent = 'Name and email are required.'; errEl.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('phone', document.getElementById('apply-phone').value.trim());
+    fd.append('jobId', document.getElementById('apply-jobId').value);
+    fd.append('jobTitle', document.getElementById('apply-jobTitle').value);
+    fd.append('linkedin', document.getElementById('apply-linkedin').value.trim());
+    fd.append('portfolio', document.getElementById('apply-portfolio').value.trim());
+    fd.append('experience', document.getElementById('apply-experience').value);
+    fd.append('coverLetter', document.getElementById('apply-cover').value.trim());
+    const resumeFile = document.getElementById('apply-resume').files[0];
+    if (resumeFile) fd.append('resume', resumeFile);
+    const r = await fetch('/api/careers/apply', { method:'POST', body: fd });
+    const d = await r.json();
+    if (d.success) {
+      sucEl.textContent = '✓ ' + (d.message || 'Application submitted! We\'ll be in touch soon.');
+      sucEl.style.display = 'block';
+      document.getElementById('applyForm').reset();
+      setTimeout(closeApplyModal, 3500);
+    } else { errEl.textContent = d.message || 'Submission failed.'; errEl.style.display = 'block'; }
+  } catch { errEl.textContent = 'Network error. Please try again.'; errEl.style.display = 'block'; }
+  finally { btn.disabled = false; btn.textContent = 'Submit Application →'; }
+});
 </script>
-</body>
-</html>
- 
