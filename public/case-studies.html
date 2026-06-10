@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Studies | NexaCore Technologies</title>
+  <meta name="description" content="Real results from real engagements. Explore how NexaCore has helped enterprises reduce costs, accelerate delivery, and build resilient technology platforms."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    .cs-full-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .cs-full-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all var(--dur-med) var(--ease);
+      display: flex; flex-direction: column;
+    }
+    .cs-full-card:hover {
+      border-color: var(--azure);
+      box-shadow: 0 20px 50px rgba(0,87,255,.07);
+      transform: translateY(-3px);
+    }
+    .cs-card-band {
+      height: 6px;
+      background: var(--grad-accent);
+    }
+    .cs-card-body { padding: 36px; flex: 1; }
+    .cs-industry {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--azure);
+      margin-bottom: 12px;
+    }
+    .cs-full-card h3 {
+      font-size: 20px; font-weight: 700; color: var(--ink);
+      letter-spacing: -.02em; line-height: 1.35; margin-bottom: 14px;
+    }
+    .cs-summary { font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .cs-outcomes {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+      margin-top: 24px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .cs-outcome-num {
+      font-size: 24px; font-weight: 800; color: var(--ink);
+      letter-spacing: -.03em; line-height: 1;
+    }
+    .cs-outcome-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .cs-card-footer {
+      padding: 16px 36px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cs-service-tag {
+      font-size: 12px; font-weight: 500;
+      background: var(--bg); color: var(--muted);
+      padding: 4px 12px; border-radius: 100px;
+    }
+    @media (max-width: 900px) {
+      .cs-full-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-inner"><div class="loader-logo">Nexa<span>Core</span></div><div class="loader-line"></div></div></div>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html">Nexa<span>Core</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="case-studies.html" class="active">Case Studies</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" onclick="event.preventDefault();openScheduleModal()" class="nav-cta-ghost">Schedule Call</a>
+    <a href="get-a-proposal.html" class="nav-cta-solid">Get a Proposal</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="case-studies.html" class="active">Case Studies</a>
+  <a href="careers.html">Careers</a>
+  <a href="insights.html">Insights</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="get-a-proposal.html">Get a Proposal</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-eyebrow" style="justify-content:center;">Client Success</div>
+    <h1>Work we're proud of,<br/>results that are real</h1>
+    <p>We don't publish made-up metrics or composite case studies. Every engagement below reflects actual client outcomes — the results, the challenges, and what we actually built.</p>
+  </div>
+</section>
+
+<section style="padding:var(--section-y) 0;background:var(--white);">
+  <div style="max-width:var(--max-w);margin:0 auto;padding:0 48px;">
+    <div class="section-eyebrow reveal">All Engagements</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Selected case studies</h2>
+
+    <div class="cs-full-grid">
+
+      <div class="cs-full-card reveal">
+        <div class="cs-card-band"></div>
+        <div class="cs-card-body">
+          <div class="cs-industry">Financial Services · Cloud Migration</div>
+          <h3>Regional bank migrates 140+ microservices to multi-cloud without downtime</h3>
+          <p class="cs-summary">A mid-size regional bank needed to exit an on-premise data centre within 18 months due to a lease expiry — without disrupting real-time payment processing or triggering a compliance incident. NexaCore led a phased migration across AWS and Azure using strangler-fig patterns, traffic shadowing, and a custom rollback framework that allowed each service to be validated independently.</p>
+          <div class="cs-outcomes">
+            <div><div class="cs-outcome-num" style="color:var(--azure);">↓ 43%</div><div class="cs-outcome-label">Infrastructure cost</div></div>
+            <div><div class="cs-outcome-num">9 mo</div><div class="cs-outcome-label">Ahead of deadline</div></div>
+            <div><div class="cs-outcome-num">0</div><div class="cs-outcome-label">Downtime incidents</div></div>
+          </div>
+        </div>
+        <div class="cs-card-footer">
+          <span class="cs-service-tag">Cloud & Infrastructure</span>
+          <a href="index.html#contact" class="btn-ghost">Discuss a similar project <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="cs-full-card reveal reveal-delay-1">
+        <div class="cs-card-band"></div>
+        <div class="cs-card-body">
+          <div class="cs-industry">Insurance · AI Automation</div>
+          <h3>InsurTech eliminates 8,000 manual hours per month with LLM-powered claims pipeline</h3>
+          <p class="cs-summary">A fast-growing property and casualty insurer was processing claims by hand — experienced adjusters spending hours extracting data from PDFs, cross-referencing policy terms, and drafting initial assessments. NexaCore built a RAG-based pipeline that extracts structured data from claims documents, retrieves relevant policy clauses, and generates draft assessments for adjuster review — reducing processing time by 74%.</p>
+          <div class="cs-outcomes">
+            <div><div class="cs-outcome-num" style="color:var(--azure);">8,200</div><div class="cs-outcome-label">Hours saved / month</div></div>
+            <div><div class="cs-outcome-num">↓ 74%</div><div class="cs-outcome-label">Processing time</div></div>
+            <div><div class="cs-outcome-num">99.1%</div><div class="cs-outcome-label">Data extraction accuracy</div></div>
+          </div>
+        </div>
+        <div class="cs-card-footer">
+          <span class="cs-service-tag">AI & Automation</span>
+          <a href="index.html#contact" class="btn-ghost">Discuss a similar project <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="cs-full-card reveal">
+        <div class="cs-card-band"></div>
+        <div class="cs-card-body">
+          <div class="cs-industry">SaaS · Platform Engineering</div>
+          <h3>B2B SaaS company achieves daily deployment cadence with redesigned CI/CD platform</h3>
+          <p class="cs-summary">A 200-person SaaS company had accumulated years of technical debt in their deployment infrastructure — releases took 4–6 hours, required manual sign-off at three stages, and failed roughly 20% of the time. NexaCore redesigned the entire CI/CD stack, implemented trunk-based development, and built automated quality gates that eliminated the need for manual release approval for 90% of changes.</p>
+          <div class="cs-outcomes">
+            <div><div class="cs-outcome-num" style="color:var(--azure);">6×</div><div class="cs-outcome-label">Release frequency</div></div>
+            <div><div class="cs-outcome-num">↓ 91%</div><div class="cs-outcome-label">Release failure rate</div></div>
+            <div><div class="cs-outcome-num">18 min</div><div class="cs-outcome-label">Avg. deploy time</div></div>
+          </div>
+        </div>
+        <div class="cs-card-footer">
+          <span class="cs-service-tag">Software Development</span>
+          <a href="index.html#contact" class="btn-ghost">Discuss a similar project <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="cs-full-card reveal reveal-delay-1">
+        <div class="cs-card-band"></div>
+        <div class="cs-card-body">
+          <div class="cs-industry">Healthcare · Security</div>
+          <h3>Healthcare network achieves SOC 2 Type II certification in 7 months from baseline zero</h3>
+          <p class="cs-summary">A telehealth network handling sensitive patient data needed to achieve SOC 2 Type II certification to close a significant enterprise contract. Their security posture was scattered — some policies existed on paper but weren't enforced, access controls were inconsistent, and they had never completed a formal risk assessment. NexaCore ran the full programme: gap assessment, remediation, evidence collection, and audit preparation.</p>
+          <div class="cs-outcomes">
+            <div><div class="cs-outcome-num" style="color:var(--azure);">7 mo</div><div class="cs-outcome-label">Zero to certified</div></div>
+            <div><div class="cs-outcome-num">0</div><div class="cs-outcome-label">Audit exceptions</div></div>
+            <div><div class="cs-outcome-num">$4.2M</div><div class="cs-outcome-label">Contract unlocked</div></div>
+          </div>
+        </div>
+        <div class="cs-card-footer">
+          <span class="cs-service-tag">IT Support & Security</span>
+          <a href="index.html#contact" class="btn-ghost">Discuss a similar project <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="cs-full-card reveal">
+        <div class="cs-card-band"></div>
+        <div class="cs-card-body">
+          <div class="cs-industry">Retail · Data Platform</div>
+          <h3>Global retailer consolidates 12 data silos into a unified analytics platform</h3>
+          <p class="cs-summary">A global apparel brand had customer, inventory, and transaction data spread across 12 different systems — none of which spoke to each other reliably. Marketing decisions were based on month-old Excel exports. NexaCore built a modern data stack with Snowflake, dbt, and Airflow that ingests from all source systems in near real-time, with a governed semantic layer that makes metrics consistent across every team that uses them.</p>
+          <div class="cs-outcomes">
+            <div><div class="cs-outcome-num" style="color:var(--azure);">12→1</div><div class="cs-outcome-label">Data silos unified</div></div>
+            <div><div class="cs-outcome-num">&lt;1hr</div><div class="cs-outcome-label">Data freshness SLA</div></div>
+            <div><div class="cs-outcome-num">↑ 19%</div><div class="cs-outcome-label">Campaign ROAS</div></div>
+          </div>
+        </div>
+        <div class="cs-card-footer">
+          <span class="cs-service-tag">AI & Automation</span>
+          <a href="index.html#contact" class="btn-ghost">Discuss a similar project <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="cs-full-card reveal reveal-delay-1">
+        <div class="cs-card-band"></div>
+        <div class="cs-card-body">
+          <div class="cs-industry">Logistics · Software Development</div>
+          <h3>3PL provider replaces 15-year-old WMS with real-time fulfilment platform</h3>
+          <p class="cs-summary">A third-party logistics provider was running warehouse operations on a 15-year-old WMS that couldn't integrate with modern carrier APIs, couldn't support same-day fulfilment windows, and required constant manual workarounds. NexaCore led a 14-month platform replacement — designing the new system in parallel with operations running on the old one, and executing a warehouse-by-warehouse cutover with zero inventory discrepancies.</p>
+          <div class="cs-outcomes">
+            <div><div class="cs-outcome-num" style="color:var(--azure);">14 mo</div><div class="cs-outcome-label">Full platform replacement</div></div>
+            <div><div class="cs-outcome-num">↓ 38%</div><div class="cs-outcome-label">Fulfilment errors</div></div>
+            <div><div class="cs-outcome-num">0</div><div class="cs-outcome-label">Inventory discrepancies</div></div>
+          </div>
+        </div>
+        <div class="cs-card-footer">
+          <span class="cs-service-tag">Software Development</span>
+          <a href="index.html#contact" class="btn-ghost">Discuss a similar project <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2 class="reveal">Working on a similar challenge?</h2>
+    <p class="reveal reveal-delay-1">We've likely seen it before. Tell us what you're dealing with and we'll tell you honestly whether and how we can help.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="index.html#contact" class="btn btn-white">Start a conversation</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="font-size:19px;">Nexa<span style="color:var(--azure);">Core</span></a>
+      <p>Enterprise IT consulting and technology delivery — from strategy to production-grade systems.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#software">Software Development</a></li>
+        <li><a href="services.html#cloud">Cloud & Infrastructure</a></li>
+        <li><a href="services.html#ai">AI & Automation</a></li>
+        <li><a href="services.html#support">IT Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#leadership">Leadership</a></li>
+        <li><a href="careers.html">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li>
+        <li><a href="case-studies.html">Case Studies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Insights</h5>
+      <ul>
+        <li><a href="#">AI & Automation</a></li>
+        <li><a href="insights.html">Cloud Strategy</a></li>
+        <li><a href="insights.html">Security</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+        <li><a href="security.html">Security</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">&copy; 2026 NexaCore Technologies, Inc. All rights reserved.</span>
+    <span class="footer-bottom-text">hello@nexacore.com</span>
+  </div>
+</footer>
+
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<script src="JS/main.js"></script>
+<!-- Schedule Call Modal -->
+<div id="scheduleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0F1523;border:1px solid rgba(255,255,255,.12);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.08);">
+      <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,87,255,.8);margin-bottom:6px;">Free Consultation</div><h3 style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;">Schedule a Call</h3></div>
+      <button onclick="closeScheduleModal()" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer;padding:4px 8px;">&#x2715;</button>
+    </div>
+    <form id="scheduleForm" style="padding:28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Full Name *</label><input id="sc-name" type="text" required placeholder="Your name" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Work Email *</label><input id="sc-email" type="email" required placeholder="you@company.com" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Company</label><input id="sc-company" type="text" placeholder="Your organisation" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Phone</label><input id="sc-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Preferred Date</label><input id="sc-date" type="date" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Preferred Time</label><select id="sc-time" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;appearance:none;"><option value="">Flexible</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option></select></div>
+      </div>
+      <div style="margin-bottom:16px;"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Topic</label><select id="sc-topic" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;appearance:none;"><option value="">Select a topic</option><option>Software Development</option><option>Cloud &amp; Infrastructure</option><option>AI &amp; Automation</option><option>IT Support &amp; Security</option><option>General Inquiry</option></select></div>
+      <div style="margin-bottom:20px;"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Brief Message</label><textarea id="sc-message" rows="3" placeholder="Anything specific you'd like us to prepare for..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;resize:vertical;"></textarea></div>
+      <div id="sc-error" style="font-size:13px;color:#F87171;margin-bottom:12px;display:none;"></div>
+      <div id="sc-success" style="font-size:14px;color:#4ADE80;margin-bottom:12px;display:none;text-align:center;padding:14px;background:rgba(74,222,128,.08);border-radius:10px;"></div>
+      <button type="submit" id="sc-submit" style="width:100%;background:#0057FF;color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Schedule My Call</button>
+    </form>
+  </div>
+</div>
+<script>
+function openScheduleModal(){document.getElementById("scheduleModal").style.display="flex";document.body.style.overflow="hidden";document.getElementById("sc-error").style.display="none";document.getElementById("sc-success").style.display="none";}
+function closeScheduleModal(){document.getElementById("scheduleModal").style.display="none";document.body.style.overflow="";}
+document.getElementById("scheduleModal").addEventListener("click",function(e){if(e.target===this)closeScheduleModal();});
+document.getElementById("scheduleForm").addEventListener("submit",async function(e){e.preventDefault();var errEl=document.getElementById("sc-error"),sucEl=document.getElementById("sc-success"),btn=document.getElementById("sc-submit");errEl.style.display="none";var name=document.getElementById("sc-name").value.trim(),email=document.getElementById("sc-email").value.trim();if(!name||!email){errEl.textContent="Name and email are required.";errEl.style.display="block";return;}btn.disabled=true;btn.textContent="Scheduling...";try{var r=await fetch("/api/schedule",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,company:document.getElementById("sc-company").value.trim(),phone:document.getElementById("sc-phone").value.trim(),preferredDate:document.getElementById("sc-date").value,preferredTime:document.getElementById("sc-time").value,topic:document.getElementById("sc-topic").value,message:document.getElementById("sc-message").value.trim()})});var d=await r.json();if(d.success){sucEl.textContent="Call scheduled! We will confirm within one business day.";sucEl.style.display="block";document.getElementById("scheduleForm").reset();setTimeout(closeScheduleModal,3000);}else{errEl.textContent=d.message||"Submission failed.";errEl.style.display="block";}}catch{errEl.textContent="Network error. Please try again.";errEl.style.display="block";}finally{btn.disabled=false;btn.textContent="Schedule My Call";}});
+</script>
+
+</body>
+</html>
