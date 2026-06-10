@@ -3,54 +3,228 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Security | NexaCore</title>
-  <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/pages.css">
-  <link rel="stylesheet" href="CSS/responsive.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head><body>
-<nav class="navbar" id="navbar">
-  <a class="logo" href="index.html">Nexa<span>Core</span></a>
+  <title>Security | NexaCore Technologies</title>
+  <meta name="description" content="NexaCore's security practices, vulnerability disclosure policy, and compliance posture for enterprise clients."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    .sec-page-section { padding: var(--section-y) 0; }
+    .sec-page-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 56px; }
+    .sec-practices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 52px; }
+    .sec-practice-card { padding: 32px; border: 1.5px solid var(--border); border-radius: 14px; background: var(--white); transition: all var(--dur-med); }
+    .sec-practice-card:hover { border-color: var(--azure); box-shadow: 0 8px 28px rgba(0,87,255,.07); transform: translateY(-2px); }
+    .spc-icon { width: 44px; height: 44px; background: var(--azure-dim); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--azure); margin-bottom: 16px; }
+    .sec-practice-card h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -.02em; }
+    .sec-practice-card p { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+    .disclosure-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 48px; margin-top: 52px; }
+    .disclosure-box h3 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 14px; letter-spacing: -.02em; }
+    .disclosure-box p { font-size: 15px; color: var(--muted); line-height: 1.78; margin-bottom: 14px; }
+    .disclosure-box a { color: var(--azure); font-weight: 600; }
+    .compliance-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 52px; }
+    .comp-badge { padding: 28px 20px; border: 1.5px solid var(--border); border-radius: 12px; text-align: center; transition: all var(--dur-med); }
+    .comp-badge:hover { border-color: var(--azure); box-shadow: 0 8px 24px rgba(0,87,255,.07); transform: translateY(-2px); }
+    .comp-badge-icon { font-size: 28px; margin-bottom: 10px; }
+    .comp-badge-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .comp-badge-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    @media(max-width:900px){
+      .sec-page-inner{padding:0 24px;}
+      .sec-practices-grid{grid-template-columns:1fr 1fr;}
+      .compliance-row{grid-template-columns:1fr 1fr;}
+      .disclosure-box{padding:32px 24px;}
+    }
+    @media(max-width:600px){
+      .sec-practices-grid{grid-template-columns:1fr;}
+      .compliance-row{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+<div id="loader"><div class="loader-inner"><div class="loader-logo">Nexa<span>Core</span></div><div class="loader-line"></div></div></div>
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html">Nexa<span>Core</span></a>
   <ul class="nav-links">
-    <li><a class="" href="services.html">Services</a></li>
-    <li><a class="" href="careers.html">Careers</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <div class="nav-auth">
-    <a href="login.html" class="nav-btn">Login</a>
-    <a href="signup.html" class="nav-btn signup-btn">Sign Up</a>
+  <div class="nav-cta">
+    <a href="#" onclick="event.preventDefault();openScheduleModal()" class="nav-cta-ghost">Schedule Call</a>
+    <a href="get-a-proposal.html" class="nav-cta-solid">Get a Proposal</a>
   </div>
-</nav><section class="page-hero legal-hero"><div class="page-kicker"><i class="fa-solid fa-file-shield"></i> Legal</div><h1>Security</h1><p>NexaCore treats security as a core part of design, delivery, and operations.</p></section><section class="legal-content"><article><h2>Overview</h2><p>We use practical safeguards including access control, secure configuration, monitoring, backups, least-privilege practices, and vendor review where appropriate.</p><h2>Our Commitment</h2><p>We keep policies clear, practical, and aligned with professional service delivery. For contract-specific questions, the signed agreement with NexaCore will control.</p><h2>Contact</h2><p>For questions about this page, contact <a href="mailto:hello@nexacore.com">hello@nexacore.com</a>.</p><p class="updated">Last updated: June 7, 2026</p></article></section>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="services.html">Services</a><a href="about.html">About</a><a href="case-studies.html">Case Studies</a><a href="careers.html">Careers</a>
+  <a href="insights.html">Insights</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="get-a-proposal.html">Get a Proposal</a>
+</div>
+
+<section class="page-hero" style="padding-bottom:72px;">
+  <div class="page-hero-inner">
+    <div class="section-eyebrow" style="justify-content:center;">Trust &amp; Safety</div>
+    <h1>Security at NexaCore</h1>
+    <p>Security is a first-class engineering concern — not a compliance exercise. Here's how we protect our systems, our clients' data, and the platforms we build and operate.</p>
+  </div>
+</section>
+
+<!-- Practices -->
+<section class="sec-page-section" style="background:var(--white);">
+  <div class="sec-page-inner">
+    <div class="section-eyebrow reveal">Our Practices</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Built secure from the ground up</h2>
+    <div class="sec-practices-grid">
+      <div class="sec-practice-card reveal">
+        <div class="spc-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div>
+        <h4>Zero Trust Architecture</h4>
+        <p>Every system we build operates on the principle that no network, device, or user is inherently trusted. Access is always verified, never assumed.</p>
+      </div>
+      <div class="sec-practice-card reveal reveal-delay-1">
+        <div class="spc-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
+        <h4>Secrets Management</h4>
+        <p>We use HashiCorp Vault and equivalent solutions to manage secrets, credentials, and certificates — no hardcoded secrets, no shared passwords, ever.</p>
+      </div>
+      <div class="sec-practice-card reveal reveal-delay-2">
+        <div class="spc-icon"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
+        <h4>Secure SDLC</h4>
+        <p>Security requirements are captured during discovery. Threat modelling, SAST scanning, dependency audits, and security review are built into every delivery pipeline.</p>
+      </div>
+      <div class="sec-practice-card reveal reveal-delay-3">
+        <div class="spc-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
+        <h4>Continuous Monitoring</h4>
+        <p>All production systems we operate run continuous vulnerability scanning, anomaly detection, and security event logging with automated alerting for critical findings.</p>
+      </div>
+      <div class="sec-practice-card reveal reveal-delay-4">
+        <div class="spc-icon"><i class="fa-solid fa-id-card-clip" aria-hidden="true"></i></div>
+        <h4>Identity &amp; Access Management</h4>
+        <p>Role-based access control, MFA enforcement, privileged access management, and quarterly access reviews are standard on every client platform we administer.</p>
+      </div>
+      <div class="sec-practice-card reveal reveal-delay-5">
+        <div class="spc-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
+        <h4>Data Protection</h4>
+        <p>Data is encrypted at rest and in transit using AES-256 and TLS 1.3+. We apply data minimisation principles and enforce retention limits on all client engagements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Compliance -->
+<section class="sec-page-section" style="background:var(--bg);">
+  <div class="sec-page-inner">
+    <div class="section-eyebrow reveal">Compliance Posture</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Aligned with enterprise compliance frameworks</h2>
+    <p class="section-body-sm reveal reveal-delay-2" style="margin-top:14px;">We build our internal practices and delivery methodology to align with the most common enterprise compliance requirements — so your audit readiness is not an afterthought.</p>
+    <div class="compliance-row">
+      <div class="comp-badge reveal">
+        <div class="comp-badge-icon">🔐</div>
+        <div class="comp-badge-name">SOC 2 Aligned</div>
+        <div class="comp-badge-desc">Security, availability &amp; confidentiality trust service criteria</div>
+      </div>
+      <div class="comp-badge reveal reveal-delay-1">
+        <div class="comp-badge-icon">🏥</div>
+        <div class="comp-badge-name">HIPAA Ready</div>
+        <div class="comp-badge-desc">Healthcare data handling and safeguard requirements</div>
+      </div>
+      <div class="comp-badge reveal reveal-delay-2">
+        <div class="comp-badge-icon">🌍</div>
+        <div class="comp-badge-name">GDPR</div>
+        <div class="comp-badge-desc">EU data protection regulation compliance</div>
+      </div>
+      <div class="comp-badge reveal reveal-delay-3">
+        <div class="comp-badge-icon">🛡️</div>
+        <div class="comp-badge-name">ISO 27001</div>
+        <div class="comp-badge-desc">Information security management system alignment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vulnerability Disclosure -->
+<section class="sec-page-section" style="background:var(--white);">
+  <div class="sec-page-inner">
+    <div class="section-eyebrow reveal">Vulnerability Disclosure</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Responsible disclosure policy</h2>
+    <div class="disclosure-box reveal reveal-delay-2">
+      <h3>Report a security issue</h3>
+      <p>If you've discovered a security vulnerability in our website or systems, we want to hear about it. We take all reports seriously and will respond within 48 hours.</p>
+      <p>Please email your findings to <a href="mailto:security@nexacore.com">security@nexacore.com</a>. Include a description of the vulnerability, steps to reproduce it, and the potential impact. We ask that you give us reasonable time to investigate and remediate before public disclosure.</p>
+      <p>We do not pursue legal action against researchers who act in good faith and follow responsible disclosure principles. We appreciate your help in keeping our systems secure.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2 class="reveal">Security questions for your procurement team?</h2>
+    <p class="reveal reveal-delay-1">We're happy to complete security questionnaires, provide documentation, or schedule a technical review call with your security team.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="index.html#contact" class="btn btn-white">Contact our security team</a>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-brand">
-    <a class="logo" href="index.html" style="color:white;">Nexa<span>Core</span></a>
-    <p>Empowering businesses through smart, scalable, and secure technology solutions.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="font-size:19px;">Nexa<span style="color:var(--azure);">Core</span></a>
+      <p>Enterprise IT consulting and technology delivery — from strategy to production-grade systems.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html#software">Software Development</a></li><li><a href="services.html#cloud">Cloud &amp; Infrastructure</a></li><li><a href="services.html#ai">AI &amp; Automation</a></li><li><a href="services.html#support">IT Support</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="about.html#leadership">Leadership</a></li><li><a href="careers.html">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li><li><a href="case-studies.html">Case Studies</a></li></ul></div>
+    <div class="footer-col"><h5>Legal</h5><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li><li><a href="security.html">Security</a></li></ul></div>
   </div>
-  <div class="footer-col">
-    <h4>Services</h4>
-    <ul>
-      <li><a href="software-development.html">Software Dev</a></li>
-      <li><a href="cloud-infrastructure.html">Cloud & Infra</a></li>
-      <li><a href="it-support.html">IT Support</a></li>
-      <li><a href="ai-automation.html">AI & Automation</a></li>
-    </ul>
-  </div>
-  <div class="footer-col">
-    <h4>Company</h4>
-    <ul>
-      <li><a href="index.html#about">About Us</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </div>
-  <div class="footer-col">
-    <h4>Legal</h4>
-    <ul>
-      <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="terms.html">Terms of Use</a></li>
-      <li><a href="security.html">Security</a></li>
-    </ul>
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">&copy; 2026 NexaCore Technologies, Inc. All rights reserved.</span>
+    <span class="footer-bottom-text"><a href="mailto:security@nexacore.com" style="color:inherit;">security@nexacore.com</a></span>
   </div>
 </footer>
-<div class="footer-bottom">&copy; 2026 NexaCore Technologies. All rights reserved.</div><script src="JS/script.js"></script></body></html>
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<script src="JS/main.js"></script>
+<!-- Schedule Call Modal -->
+<div id="scheduleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0F1523;border:1px solid rgba(255,255,255,.12);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.08);">
+      <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,87,255,.8);margin-bottom:6px;">Free Consultation</div><h3 style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;">Schedule a Call</h3></div>
+      <button onclick="closeScheduleModal()" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer;padding:4px 8px;">&#x2715;</button>
+    </div>
+    <form id="scheduleForm" style="padding:28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Full Name *</label><input id="sc-name" type="text" required placeholder="Your name" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Work Email *</label><input id="sc-email" type="email" required placeholder="you@company.com" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Company</label><input id="sc-company" type="text" placeholder="Your organisation" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Phone</label><input id="sc-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Preferred Date</label><input id="sc-date" type="date" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Preferred Time</label><select id="sc-time" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;appearance:none;"><option value="">Flexible</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option></select></div>
+      </div>
+      <div style="margin-bottom:16px;"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Topic</label><select id="sc-topic" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;appearance:none;"><option value="">Select a topic</option><option>Software Development</option><option>Cloud &amp; Infrastructure</option><option>AI &amp; Automation</option><option>IT Support &amp; Security</option><option>General Inquiry</option></select></div>
+      <div style="margin-bottom:20px;"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Brief Message</label><textarea id="sc-message" rows="3" placeholder="Anything specific you'd like us to prepare for..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;resize:vertical;"></textarea></div>
+      <div id="sc-error" style="font-size:13px;color:#F87171;margin-bottom:12px;display:none;"></div>
+      <div id="sc-success" style="font-size:14px;color:#4ADE80;margin-bottom:12px;display:none;text-align:center;padding:14px;background:rgba(74,222,128,.08);border-radius:10px;"></div>
+      <button type="submit" id="sc-submit" style="width:100%;background:#0057FF;color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Schedule My Call</button>
+    </form>
+  </div>
+</div>
+<script>
+function openScheduleModal(){document.getElementById("scheduleModal").style.display="flex";document.body.style.overflow="hidden";document.getElementById("sc-error").style.display="none";document.getElementById("sc-success").style.display="none";}
+function closeScheduleModal(){document.getElementById("scheduleModal").style.display="none";document.body.style.overflow="";}
+document.getElementById("scheduleModal").addEventListener("click",function(e){if(e.target===this)closeScheduleModal();});
+document.getElementById("scheduleForm").addEventListener("submit",async function(e){e.preventDefault();var errEl=document.getElementById("sc-error"),sucEl=document.getElementById("sc-success"),btn=document.getElementById("sc-submit");errEl.style.display="none";var name=document.getElementById("sc-name").value.trim(),email=document.getElementById("sc-email").value.trim();if(!name||!email){errEl.textContent="Name and email are required.";errEl.style.display="block";return;}btn.disabled=true;btn.textContent="Scheduling...";try{var r=await fetch("/api/schedule",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,company:document.getElementById("sc-company").value.trim(),phone:document.getElementById("sc-phone").value.trim(),preferredDate:document.getElementById("sc-date").value,preferredTime:document.getElementById("sc-time").value,topic:document.getElementById("sc-topic").value,message:document.getElementById("sc-message").value.trim()})});var d=await r.json();if(d.success){sucEl.textContent="Call scheduled! We will confirm within one business day.";sucEl.style.display="block";document.getElementById("scheduleForm").reset();setTimeout(closeScheduleModal,3000);}else{errEl.textContent=d.message||"Submission failed.";errEl.style.display="block";}}catch{errEl.textContent="Network error. Please try again.";errEl.style.display="block";}finally{btn.disabled=false;btn.textContent="Schedule My Call";}});
+</script>
+
+</body>
+</html>
