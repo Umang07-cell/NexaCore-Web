@@ -3,134 +3,331 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services | NexaCore</title>
-  <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/pages.css">
-  <link rel="stylesheet" href="CSS/responsive.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Services | NexaCore Technologies</title>
+  <meta name="description" content="Software development, cloud infrastructure, AI automation, and managed IT services — delivered by senior consultants with enterprise-grade rigour."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-  <a class="logo" href="index.html">Nexa<span>Core</span></a>
+<div id="loader"><div class="loader-inner"><div class="loader-logo">Nexa<span>Core</span></div><div class="loader-line"></div></div></div>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html">Nexa<span>Core</span></a>
   <ul class="nav-links">
-    <li><a class="active" href="services.html">Services</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
     <li><a href="careers.html">Careers</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="insights.html">Insights</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <div class="nav-auth">
-    <a href="login.html" class="nav-btn">Login</a>
-    <a href="signup.html" class="nav-btn signup-btn">Sign Up</a>
+  <div class="nav-cta">
+    <a href="#" onclick="event.preventDefault();openScheduleModal()" class="nav-cta-ghost">Schedule Call</a>
+    <a href="get-a-proposal.html" class="nav-cta-solid">Get a Proposal</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="services.html" class="active">Services</a>
+  <a href="about.html">About</a>
+  <a href="case-studies.html">Case Studies</a>
+  <a href="careers.html">Careers</a>
+  <a href="insights.html">Insights</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="get-a-proposal.html">Get a Proposal</a>
+</div>
 
+<!-- HERO -->
 <section class="page-hero">
-  <div class="page-kicker"><i class="fa-solid fa-layer-group"></i> Services</div>
-  <h1>Technology Solutions That Work</h1>
-  <p>From custom software to cloud infrastructure, IT support, and AI automation — NexaCore delivers reliable, scalable services for growing businesses.</p>
-  <div class="page-actions">
-    <a class="btn-primary" href="signup.html">Get Started</a>
-    <a class="btn-secondary" href="index.html#contact">Talk to Us</a>
+  <div class="page-hero-inner">
+    <div class="section-eyebrow" style="justify-content:center;">What We Do</div>
+    <h1>Technology services built<br/>for enterprise demands</h1>
+    <p>Every practice we run is shaped around one question: what does this client need to reliably ship, scale, and secure? No generic retainers. Scoped delivery with measurable outcomes.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px;">
+      <a href="index.html#contact" class="btn btn-primary">Get a Proposal <span class="arrow">→</span></a>
+      <a href="case-studies.html" class="btn btn-outline-white">View Case Studies</a>
+    </div>
   </div>
 </section>
 
-<section class="jobs-section">
-  <div class="section-header">
-    <div class="section-label">What We Offer</div>
-    <h2>Our Core Services</h2>
-    <p>Each practice is built around a specific business need — choose one or combine them.</p>
-  </div>
-  <div class="job-grid" style="grid-template-columns: repeat(2, 1fr);">
+<!-- SERVICE DETAILS -->
+<section class="service-detail-section" id="software">
+  <div class="service-detail-inner">
+    <div class="section-eyebrow reveal">Engineering</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Software Development</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-top:16px;">From greenfield products to platform modernisation, our engineering teams build software that is fast, maintainable, and designed to outlast the engagement. We work alongside your internal teams or lead delivery end-to-end.</p>
 
-    <div class="job-card">
-      <span><i class="fa-solid fa-code"></i> Development</span>
-      <h3>Software Development</h3>
-      <p>Custom web, mobile, and enterprise applications built with modern engineering practices. From MVP to production-grade systems.</p>
-      <a href="software-development.html">Learn More →</a>
+    <div class="service-detail-grid">
+      <div class="service-detail-card reveal">
+        <div class="sdc-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <h3>Full-Stack Web Applications</h3>
+        <p>Modern web platforms built with React, Next.js, Node.js, and Python — designed for performance, accessibility, and long-term maintainability. We include design systems, API contracts, and test coverage by default.</p>
+        <div class="sdc-tags"><span class="sdc-tag">React</span><span class="sdc-tag">Next.js</span><span class="sdc-tag">Node.js</span><span class="sdc-tag">Python</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-1">
+        <div class="sdc-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+        <h3>Mobile Applications</h3>
+        <p>Native iOS and Android apps, or cross-platform React Native and Flutter builds, depending on what your use case actually demands. We don't push one approach — we evaluate the right fit for your users and your team.</p>
+        <div class="sdc-tags"><span class="sdc-tag">React Native</span><span class="sdc-tag">Flutter</span><span class="sdc-tag">Swift</span><span class="sdc-tag">Kotlin</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-2">
+        <div class="sdc-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <h3>Platform Modernisation</h3>
+        <p>Rebuilding legacy systems is high-stakes work. We use strangler-fig patterns, incremental migrations, and feature parity frameworks to modernise without the big-bang risk that disrupts operations.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Microservices</span><span class="sdc-tag">Event-driven</span><span class="sdc-tag">API-first</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-3">
+        <div class="sdc-icon"><i class="fa-solid fa-gear"></i></div>
+        <h3>API Design & Integration</h3>
+        <p>RESTful, GraphQL, and gRPC APIs built with developer experience in mind. We design contracts that serve both internal consumers and external partners — with versioning, auth, and rate limiting from day one.</p>
+        <div class="sdc-tags"><span class="sdc-tag">REST</span><span class="sdc-tag">GraphQL</span><span class="sdc-tag">gRPC</span><span class="sdc-tag">OpenAPI</span></div>
+      </div>
     </div>
-
-    <div class="job-card">
-      <span><i class="fa-solid fa-cloud"></i> Infrastructure</span>
-      <h3>Cloud & Infrastructure</h3>
-      <p>Cloud migration, architecture design, monitoring, and cost optimization across AWS, GCP, and Azure.</p>
-      <a href="cloud-infrastructure.html">Learn More →</a>
-    </div>
-
-    <div class="job-card">
-      <span><i class="fa-solid fa-headset"></i> Support</span>
-      <h3>IT Support</h3>
-      <p>Responsive helpdesk, device management, security fundamentals, and dependable day-to-day operations for your team.</p>
-      <a href="it-support.html">Learn More →</a>
-    </div>
-
-    <div class="job-card">
-      <span><i class="fa-solid fa-robot"></i> Automation</span>
-      <h3>AI & Automation</h3>
-      <p>Practical AI workflows that reduce manual work, surface insights, and improve business visibility — no hype, just results.</p>
-      <a href="ai-automation.html">Learn More →</a>
-    </div>
-
   </div>
 </section>
 
-<section class="culture-section" style="margin-top: 0;">
-  <div>
-    <div class="section-label">Why NexaCore</div>
-    <h2>Built for Businesses That Ship</h2>
-    <p>We work with teams that need reliable partners — not consultants who disappear after the kickoff call. Every engagement is scoped, delivered, and supported with clarity.</p>
-  </div>
-  <div class="culture-list">
-    <span>Fixed-scope delivery</span>
-    <span>Senior-led teams</span>
-    <span>Transparent pricing</span>
-    <span>Long-term support</span>
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="section-eyebrow reveal">How We Work</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Our delivery framework</h2>
+    <div class="process-timeline">
+      <div class="process-step-card reveal">
+        <div class="psc-num">01</div>
+        <div class="psc-title">Discovery</div>
+        <div class="psc-desc">Stakeholder interviews, technical landscape review, and constraint mapping to define the real problem.</div>
+      </div>
+      <div class="process-step-card reveal reveal-delay-1">
+        <div class="psc-num">02</div>
+        <div class="psc-title">Architecture</div>
+        <div class="psc-desc">Senior architects produce a detailed design, risk register, and milestone plan for your review and sign-off.</div>
+      </div>
+      <div class="process-step-card reveal reveal-delay-2">
+        <div class="psc-num">03</div>
+        <div class="psc-title">Delivery</div>
+        <div class="psc-desc">Agile sprints with weekly demos, a live project board you can access any time, and no hidden progress.</div>
+      </div>
+      <div class="process-step-card reveal reveal-delay-3">
+        <div class="psc-num">04</div>
+        <div class="psc-title">Operate</div>
+        <div class="psc-desc">Post-launch monitoring, SLA-backed support, and continuous improvement cycles — we stay accountable.</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section style="padding: 80px 40px; text-align: center; background: var(--navy);">
-  <div class="section-label" style="color: var(--sky-blue);">Get Started</div>
-  <h2 style="color: white; font-size: 36px; margin: 12px 0;">Ready to work with NexaCore?</h2>
-  <p style="color: rgba(255,255,255,.65); max-width: 500px; margin: 0 auto 32px;">Create an account to access your client portal and request services directly.</p>
-  <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-    <a href="signup.html" class="btn-primary">Create Free Account</a>
-    <a href="index.html#contact" class="btn-secondary" style="border-color:rgba(255,255,255,.3); color:white;">Contact Sales</a>
+<!-- CLOUD -->
+<section class="service-detail-section" id="cloud" style="background:var(--bg);">
+  <div class="service-detail-inner">
+    <div class="section-eyebrow reveal">Infrastructure</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Cloud & Infrastructure</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-top:16px;">Cloud strategy is only valuable if it translates into lower cost, higher reliability, and faster delivery. We design architectures that are operationally sound, not just theoretically elegant.</p>
+
+    <div class="service-detail-grid">
+      <div class="service-detail-card reveal">
+        <div class="sdc-icon"><i class="fa-brands fa-aws"></i></div>
+        <h3>Cloud Migration</h3>
+        <p>Lift-and-shift, re-platforming, or full re-architecture — we assess which migration approach is right for each workload and execute with minimal disruption to live operations.</p>
+        <div class="sdc-tags"><span class="sdc-tag">AWS</span><span class="sdc-tag">GCP</span><span class="sdc-tag">Azure</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-1">
+        <div class="sdc-icon"><i class="fa-solid fa-cubes"></i></div>
+        <h3>Kubernetes & Container Orchestration</h3>
+        <p>Production-grade container platforms with proper multi-tenancy, auto-scaling, GitOps workflows, and service mesh configuration that teams can actually operate.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Kubernetes</span><span class="sdc-tag">Helm</span><span class="sdc-tag">ArgoCD</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-2">
+        <div class="sdc-icon"><i class="fa-solid fa-code-branch"></i></div>
+        <h3>Infrastructure as Code</h3>
+        <p>Every resource we provision is version-controlled, peer-reviewed, and reproducible. Terraform and Pulumi mean your infrastructure state is auditable, not tribal knowledge.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Terraform</span><span class="sdc-tag">Pulumi</span><span class="sdc-tag">CDK</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-3">
+        <div class="sdc-icon"><i class="fa-solid fa-chart-pie"></i></div>
+        <h3>FinOps & Cost Optimisation</h3>
+        <p>Cloud bills that grew faster than your team expected. We audit resource utilisation, right-size workloads, implement reserved instance strategies, and put dashboards in place so the numbers stay honest.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Datadog</span><span class="sdc-tag">CloudHealth</span><span class="sdc-tag">Spot.io</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- AI -->
+<section class="service-detail-section" id="ai">
+  <div class="service-detail-inner">
+    <div class="section-eyebrow reveal">AI &amp; Automation</div>
+    <h2 class="section-h2 reveal reveal-delay-1">AI &amp; Intelligent Automation</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-top:16px;">We focus on AI applications that eliminate real operational cost or create measurable business value — not proofs of concept that sit in a slide deck. Production deployment is the success criterion.</p>
+
+    <div class="service-detail-grid">
+      <div class="service-detail-card reveal">
+        <div class="sdc-icon"><i class="fa-solid fa-brain"></i></div>
+        <h3>LLM Integration & RAG Systems</h3>
+        <p>Enterprise knowledge bases, internal search, document Q&A, and customer-facing AI assistants built with retrieval-augmented generation for factual grounding and auditability.</p>
+        <div class="sdc-tags"><span class="sdc-tag">LangChain</span><span class="sdc-tag">OpenAI</span><span class="sdc-tag">RAG</span><span class="sdc-tag">Vector DB</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-1">
+        <div class="sdc-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3>Process Automation</h3>
+        <p>Document processing, approval workflows, data extraction, and classification pipelines that replace manual work with reliable, auditable automation at scale.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Python</span><span class="sdc-tag">Apache Airflow</span><span class="sdc-tag">n8n</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-2">
+        <div class="sdc-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3>ML & Predictive Analytics</h3>
+        <p>Demand forecasting, churn prediction, fraud detection, and recommendation engines — end-to-end from data pipeline to model deployment to monitoring in production.</p>
+        <div class="sdc-tags"><span class="sdc-tag">PyTorch</span><span class="sdc-tag">scikit-learn</span><span class="sdc-tag">MLflow</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-3">
+        <div class="sdc-icon"><i class="fa-solid fa-chart-column"></i></div>
+        <h3>Data Platform Engineering</h3>
+        <p>Modern data stacks with dbt, Snowflake, BigQuery, and real-time streaming that give your analysts and data scientists reliable, governed access to the right data.</p>
+        <div class="sdc-tags"><span class="sdc-tag">dbt</span><span class="sdc-tag">Snowflake</span><span class="sdc-tag">Kafka</span><span class="sdc-tag">Spark</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="service-detail-section" id="support" style="background:var(--bg);">
+  <div class="service-detail-inner">
+    <div class="section-eyebrow reveal">Managed Services</div>
+    <h2 class="section-h2 reveal reveal-delay-1">IT Support &amp; Security</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-top:16px;">Reliable IT operations aren't glamorous, but they're critical. We provide managed support, endpoint security, and compliance readiness so your teams can focus on the work that matters.</p>
+
+    <div class="service-detail-grid">
+      <div class="service-detail-card reveal">
+        <div class="sdc-icon"><i class="fa-solid fa-headset"></i></div>
+        <h3>Managed Helpdesk</h3>
+        <p>Tier 1 through Tier 3 support, with SLA-backed response times, ticket management, and monthly reporting. Human engineers, not bots routing you in circles.</p>
+        <div class="sdc-tags"><span class="sdc-tag">SLA-backed</span><span class="sdc-tag">24/7 available</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-1">
+        <div class="sdc-icon"><i class="fa-solid fa-laptop-code"></i></div>
+        <h3>Endpoint & Device Management</h3>
+        <p>MDM deployment, patch management, asset inventory, and device security baselines across Mac, Windows, and mobile — managed centrally so nothing falls through the gaps.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Jamf</span><span class="sdc-tag">Intune</span><span class="sdc-tag">Kandji</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-2">
+        <div class="sdc-icon"><i class="fa-solid fa-shield-virus"></i></div>
+        <h3>Security Operations</h3>
+        <p>Vulnerability scanning, SIEM monitoring, identity access reviews, and incident response — continuous security operations that keep your posture current, not just compliant on paper.</p>
+        <div class="sdc-tags"><span class="sdc-tag">Wiz</span><span class="sdc-tag">CrowdStrike</span><span class="sdc-tag">Okta</span></div>
+      </div>
+      <div class="service-detail-card reveal reveal-delay-3">
+        <div class="sdc-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+        <h3>Compliance Readiness</h3>
+        <p>Gap assessments, policy documentation, evidence collection, and audit preparation for SOC 2, ISO 27001, HIPAA, and GDPR — structured to pass, not just check boxes.</p>
+        <div class="sdc-tags"><span class="sdc-tag">SOC 2</span><span class="sdc-tag">ISO 27001</span><span class="sdc-tag">HIPAA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2 class="reveal">Not sure which service fits?</h2>
+    <p class="reveal reveal-delay-1">Most engagements start with a 30-minute discovery call. We'll ask the right questions and tell you honestly whether and how NexaCore can help.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="index.html#contact" class="btn btn-white">Book a Discovery Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <a class="logo" href="index.html" style="color:white;">Nexa<span>Core</span></a>
-    <p>Empowering businesses through smart, scalable, and secure technology solutions.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="font-size:19px;">Nexa<span style="color:var(--azure);">Core</span></a>
+      <p>Enterprise IT consulting and technology delivery — from strategy to production-grade systems.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#software">Software Development</a></li>
+        <li><a href="services.html#cloud">Cloud & Infrastructure</a></li>
+        <li><a href="services.html#ai">AI & Automation</a></li>
+        <li><a href="services.html#support">IT Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#leadership">Leadership</a></li>
+        <li><a href="careers.html">Careers</a></li>
+    <li><a href="insights.html">Insights</a></li>
+        <li><a href="case-studies.html">Case Studies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Insights</h5>
+      <ul>
+        <li><a href="#">AI & Automation</a></li>
+        <li><a href="insights.html">Cloud Strategy</a></li>
+        <li><a href="insights.html">Security</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+        <li><a href="security.html">Security</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-col">
-    <h4>Services</h4>
-    <ul>
-      <li><a href="software-development.html">Software Dev</a></li>
-      <li><a href="cloud-infrastructure.html">Cloud & Infra</a></li>
-      <li><a href="it-support.html">IT Support</a></li>
-      <li><a href="ai-automation.html">AI & Automation</a></li>
-    </ul>
-  </div>
-  <div class="footer-col">
-    <h4>Company</h4>
-    <ul>
-      <li><a href="index.html#about">About Us</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </div>
-  <div class="footer-col">
-    <h4>Legal</h4>
-    <ul>
-      <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="terms.html">Terms of Use</a></li>
-      <li><a href="security.html">Security</a></li>
-    </ul>
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">&copy; 2026 NexaCore Technologies, Inc. All rights reserved.</span>
+    <span class="footer-bottom-text">hello@nexacore.com</span>
   </div>
 </footer>
-<div class="footer-bottom">&copy; 2026 NexaCore Technologies. All rights reserved.</div>
 
-<script src="JS/script.js"></script>
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<script src="JS/main.js"></script>
+<!-- Schedule Call Modal -->
+<div id="scheduleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0F1523;border:1px solid rgba(255,255,255,.12);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.08);">
+      <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,87,255,.8);margin-bottom:6px;">Free Consultation</div><h3 style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;">Schedule a Call</h3></div>
+      <button onclick="closeScheduleModal()" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer;padding:4px 8px;">&#x2715;</button>
+    </div>
+    <form id="scheduleForm" style="padding:28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Full Name *</label><input id="sc-name" type="text" required placeholder="Your name" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Work Email *</label><input id="sc-email" type="email" required placeholder="you@company.com" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Company</label><input id="sc-company" type="text" placeholder="Your organisation" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Phone</label><input id="sc-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Preferred Date</label><input id="sc-date" type="date" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;"/></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Preferred Time</label><select id="sc-time" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;appearance:none;"><option value="">Flexible</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option></select></div>
+      </div>
+      <div style="margin-bottom:16px;"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Topic</label><select id="sc-topic" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;appearance:none;"><option value="">Select a topic</option><option>Software Development</option><option>Cloud &amp; Infrastructure</option><option>AI &amp; Automation</option><option>IT Support &amp; Security</option><option>General Inquiry</option></select></div>
+      <div style="margin-bottom:20px;"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px;">Brief Message</label><textarea id="sc-message" rows="3" placeholder="Anything specific you'd like us to prepare for..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 14px;font-size:14px;font-family:inherit;resize:vertical;"></textarea></div>
+      <div id="sc-error" style="font-size:13px;color:#F87171;margin-bottom:12px;display:none;"></div>
+      <div id="sc-success" style="font-size:14px;color:#4ADE80;margin-bottom:12px;display:none;text-align:center;padding:14px;background:rgba(74,222,128,.08);border-radius:10px;"></div>
+      <button type="submit" id="sc-submit" style="width:100%;background:#0057FF;color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Schedule My Call</button>
+    </form>
+  </div>
+</div>
+<script>
+function openScheduleModal(){document.getElementById("scheduleModal").style.display="flex";document.body.style.overflow="hidden";document.getElementById("sc-error").style.display="none";document.getElementById("sc-success").style.display="none";}
+function closeScheduleModal(){document.getElementById("scheduleModal").style.display="none";document.body.style.overflow="";}
+document.getElementById("scheduleModal").addEventListener("click",function(e){if(e.target===this)closeScheduleModal();});
+document.getElementById("scheduleForm").addEventListener("submit",async function(e){e.preventDefault();var errEl=document.getElementById("sc-error"),sucEl=document.getElementById("sc-success"),btn=document.getElementById("sc-submit");errEl.style.display="none";var name=document.getElementById("sc-name").value.trim(),email=document.getElementById("sc-email").value.trim();if(!name||!email){errEl.textContent="Name and email are required.";errEl.style.display="block";return;}btn.disabled=true;btn.textContent="Scheduling...";try{var r=await fetch("/api/schedule",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,company:document.getElementById("sc-company").value.trim(),phone:document.getElementById("sc-phone").value.trim(),preferredDate:document.getElementById("sc-date").value,preferredTime:document.getElementById("sc-time").value,topic:document.getElementById("sc-topic").value,message:document.getElementById("sc-message").value.trim()})});var d=await r.json();if(d.success){sucEl.textContent="Call scheduled! We will confirm within one business day.";sucEl.style.display="block";document.getElementById("scheduleForm").reset();setTimeout(closeScheduleModal,3000);}else{errEl.textContent=d.message||"Submission failed.";errEl.style.display="block";}}catch{errEl.textContent="Network error. Please try again.";errEl.style.display="block";}finally{btn.disabled=false;btn.textContent="Schedule My Call";}});
+</script>
+
 </body>
 </html>
